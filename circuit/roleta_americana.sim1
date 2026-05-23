@@ -18,13 +18,17 @@
 
 <item itemtype="Resistor" CircId="Resistor-9" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="-92,-52" rotation="0" hflip="1" vflip="1" label="Resistor-9" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
 
-<item itemtype="Ground" CircId="Ground-23" mainComp="false" Show_id="false" Show_Val="false" Pos="164,176" rotation="0" hflip="1" vflip="1" label="Ground-23" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+<item itemtype="Ground" CircId="Ground-23" mainComp="false" Show_id="false" Show_Val="false" Pos="164,188" rotation="0" hflip="1" vflip="1" label="Ground-23" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
 
 <item itemtype="Or Gate" CircId="Or Gate-24" mainComp="false" Show_id="false" Show_Val="false" Pos="144,116" rotation="-450" hflip="1" vflip="1" label="Or Gate-24" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Input_High_V="2.5 V" Input_Low_V="2.5 V" Input_Imped="1000 MΩ" Invert_Inputs="false" Num_Inputs="2 _Inputs" Out_High_V="5 V" Out_Low_V="0 V" Out_Imped="40 Ω" initHigh="false" Inverted="false" Open_Collector="false" Tpd_ps="10 ns" Tr_ps="3 ns" Tf_ps="4 ns" />
 
 <item itemtype="Or Gate" CircId="Or Gate-25" mainComp="false" Show_id="false" Show_Val="false" Pos="176,112" rotation="-450" hflip="1" vflip="1" label="Or Gate-25" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Input_High_V="2.5 V" Input_Low_V="2.5 V" Input_Imped="1000 MΩ" Invert_Inputs="false" Num_Inputs="2 _Inputs" Out_High_V="5 V" Out_Low_V="0 V" Out_Imped="40 Ω" initHigh="false" Inverted="false" Open_Collector="false" Tpd_ps="10 ns" Tr_ps="3 ns" Tf_ps="4 ns" />
 
+<item itemtype="Push" CircId="Push-27" mainComp="false" Show_id="false" Show_Val="false" Pos="8,44" rotation="0" hflip="1" vflip="1" label="Push-27" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
+
 <item itemtype="Node" CircId="Node-26" mainComp="false" Pos="164,140" />
+
+<item itemtype="Node" CircId="Node-29" mainComp="false" Pos="164,160" />
 
 <item itemtype="Connector" uid="Connector-12" startpinid="mega328-1-PORTC5" endpinid="Resistor-8-lPin" pointList="-16,-52,-8,-52" />
 
@@ -64,8 +68,14 @@
 
 <item itemtype="Connector" uid="Connector-61" startpinid="Node-26-1" endpinid="Or Gate-25-in0" pointList="164,140,172,140,172,128" />
 
-<item itemtype="Connector" uid="Connector-62" startpinid="Ground-23-Gnd" endpinid="Node-26-0" pointList="164,160,164,140" />
-
 <item itemtype="Connector" uid="Connector-63" startpinid="Node-26-2" endpinid="Or Gate-24-in1" pointList="164,140,148,140,148,132" />
+
+<item itemtype="Connector" uid="Connector-64" startpinid="mega328-1-PORTB2" endpinid="Push-27-pinP0" pointList="-16,44,-8,44" />
+
+<item itemtype="Connector" uid="Connector-68" startpinid="Push-27-switch0pinN" endpinid="Node-29-1" pointList="24,44,24,160,164,160" />
+
+<item itemtype="Connector" uid="Connector-69" startpinid="Ground-23-Gnd" endpinid="Node-29-0" pointList="164,172,164,160" />
+
+<item itemtype="Connector" uid="Connector-70" startpinid="Node-29-2" endpinid="Node-26-0" pointList="164,160,164,140" />
 
 </circuit>
