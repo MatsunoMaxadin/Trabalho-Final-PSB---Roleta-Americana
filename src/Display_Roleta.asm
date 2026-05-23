@@ -27,8 +27,12 @@ OUT DISPLAY, AUX
 STS UCSR0B, R1
 
 Principal:
-	SBIS PINB, BOTAO
+	SBIC PINB, BOTAO
+	RJMP inicio
+	RCALL Decodifica_dezena
+	RCALL Decodifica_unidade
 	RJMP Principal
+inicio:
 	CPI dezena, 0X00
 	BREQ caso_00
 	CPI dezena, 0x04
