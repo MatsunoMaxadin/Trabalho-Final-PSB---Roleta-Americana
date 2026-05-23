@@ -18,10 +18,10 @@ LDI AUX, 0xff
 OUT DDRC, AUX
 LDI AUX, 0b00000011
 OUT DDRB, AUX
+LDI AUX, 0b00000100
+OUT PORTB, AUX
 LDI dezena, 0x00
 LDI unidade, 0x01
-CBI PORTB, flagDezena
-CBI PORTB, flagUnidade
 LDI AUX, 0x00
 OUT DISPLAY, AUX
 STS UCSR0B, R1
@@ -47,7 +47,7 @@ Principal:
 	RJMP inicializacoes
 	caso_00:
 	RCALL Decodifica_dezena
-	RCALL Atraso
+	RCALL Decodifica_unidade
 	INC dezena
 	RJMP Principal
 	
@@ -55,18 +55,16 @@ Principal:
 	
 	Decod:
 	RCALL Decodifica_dezena
-	RCALL Atraso
+	RCALL Decodifica_unidade
 	RJMP Principal
 
 Atraso:
-	LDI R19, 16
-volta:
+	LDI R17, 255
+
+loop:
 	DEC R17
-	BRNE volta
-	DEC R18
-	BRNE volta
-	DEC R19
-	BRNE volta
+	BRNE loop
+
 	RET
 Decodifica_dezena:
 	
@@ -81,10 +79,12 @@ Decodifica_dezena:
 
 
 le_tab_dezena:
-	CBI PINB,flagDezena
-	SBI PINB,flagUnidade
+	CBI PORTB,flagDezena
+	SBI PORTB,flagUnidade
 	LPM R0, Z 
 	OUT DISPLAY, R0
+	RCALL Atraso
+	RET
 Decodifica_unidade:
 
 	
@@ -99,10 +99,11 @@ Decodifica_unidade:
 
 
 le_tab_unidade:
-	SBI PINB,flagDezena
-	CBI PINB,flagUnidade
+	SBI PORTB,flagDezena
+	CBI PORTB,flagUnidade
 	LPM R0, Z 
 	OUT DISPLAY, R0
+	RCALL Atraso
 	RET
 	
 
