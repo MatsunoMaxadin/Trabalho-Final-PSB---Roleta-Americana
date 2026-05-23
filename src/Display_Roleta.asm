@@ -46,7 +46,7 @@ inicio:
 	INC unidade
 	RJMP decod
 	verifica_unidade_do_30:
-	CPI unidade, 0x09
+	CPI unidade, 0x07
 	BRNE incrementa_unidade
 	RJMP inicializacoes
 	caso_00:
