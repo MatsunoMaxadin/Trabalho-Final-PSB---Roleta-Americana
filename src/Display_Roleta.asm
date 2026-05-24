@@ -3,8 +3,8 @@
 .list
 
 .equ DISPLAY = PORTC
-.equ flagDezena = PB0
-.equ flagUnidade = PB1
+.equ flagDezena = PB3
+.equ flagUnidade = PB4
 .equ BOTAO = PB2
 .def AUX = R16
 .def dezena = R20
@@ -16,7 +16,7 @@ inicializacoes:
 
 LDI AUX, 0xff
 OUT DDRC, AUX
-LDI AUX, 0b00000011
+LDI AUX, 0b00011000
 OUT DDRB, AUX
 LDI AUX, 0b00000100
 OUT PORTB, AUX
@@ -24,7 +24,6 @@ LDI dezena, 0x00
 LDI unidade, 0x01
 LDI AUX, 0x00
 OUT DISPLAY, AUX
-STS UCSR0B, R1
 
 Principal:
 	SBIC PINB, BOTAO
