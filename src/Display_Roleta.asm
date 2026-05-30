@@ -1,10 +1,4 @@
-
-
-
 .ORG 0x010
-
-
-
 
 inicio:
 	CPI dezena, 0x03
