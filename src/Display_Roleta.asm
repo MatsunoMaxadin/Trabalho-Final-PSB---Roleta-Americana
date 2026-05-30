@@ -1,4 +1,4 @@
-.ORG 0x010
+.ORG 0x030
 
 inicio:
 	CPI dezena, 0x03
@@ -49,8 +49,8 @@ Decodifica_dezena:
 
 
 le_tab_dezena:
-	CBI PORTB,flagDezena
-	SBI PORTB,flagUnidade
+	CBI PORTC,flagA
+	SBI PORTC,flagB
 	LPM R0, Z 
 	OUT DISPLAY, R0
 	RCALL Atraso
@@ -69,8 +69,8 @@ Decodifica_unidade:
 
 
 le_tab_unidade:
-	SBI PORTB,flagDezena
-	CBI PORTB,flagUnidade
+	SBI PORTC,flagA
+	CBI PORTC,flagB
 	LPM R0, Z 
 	OUT DISPLAY, R0
 	RCALL Atraso
