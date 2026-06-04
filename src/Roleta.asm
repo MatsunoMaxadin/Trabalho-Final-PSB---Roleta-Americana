@@ -2,6 +2,7 @@
 .include "m328Pdef.inc"
 .list
 
+; colocando etiquetas para os pinos e definindo registradores
 .equ DISPLAY = PORTD
 .equ flagA = PC5
 .equ flagB = PC4
@@ -20,21 +21,22 @@
 .def dezena = R20
 .def unidade = R21
 
-.include "Display_Roleta.asm"
+; incluindo outras funçoes
+.include "Roletar.asm" 
 
 .ORG 0x010
 
 inicializacoes:
-LDI AUX, 0b11111011
-OUT DDRD, AUX
-LDI AUX, 0xff
-OUT DDRC, AUX
+LDI AUX, 0b11111011 
+OUT DDRD, AUX ; inicializando o DISPLAY, com todos os pinos sendo de saída, menos PD2, que é a entrada para a interrupção
+LDI AUX, 0xff 
+OUT DDRC, AUX ; inicializando todos os pinos da portaC como saída
 LDI AUX, 0b11110000
-OUT DDRB, AUX
+OUT DDRB, AUX ; inicializando os 4 primeiros pinos da PORTB como entrada (botoes) e os 4 últimos como saída (LEDS)
 LDI AUX, 0b00001111
-OUT PORTB, AUX
+OUT PORTB, AUX ; ativando o pull-up para os botoes e desligando os LEDS
 LDI AUX, 0x00
-OUT PORTC, AUX
+OUT PORTC, AUX ; ligando os displays
 LDI dezena, 0x00
 LDI unidade, 0x00
 LDI AUX, 0b00000100
@@ -44,7 +46,7 @@ Principal:
 	RCALL Decodifica_dezena
         RCALL Decodifica_unidade
 	SBIS PINB, ROLETAR
-	RJMP inicio
+	RCALL Roleta
 	RCALL Decodifica_dezena
 	RCALL Decodifica_unidade
 	RJMP Principal

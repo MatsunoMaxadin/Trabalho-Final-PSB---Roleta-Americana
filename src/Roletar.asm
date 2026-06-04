@@ -1,6 +1,6 @@
 .ORG 0x030
 
-inicio:
+Roleta:
 	CPI dezena, 0x03
 	BREQ verifica_unidade_do_30
 	CPI unidade, 0x09
@@ -19,14 +19,14 @@ inicio:
 	RCALL Decodifica_dezena
 	RCALL Decodifica_unidade
 	INC dezena
-	RJMP Principal
+	RET
 	
 	
 	
 	Decod:
 	RCALL Decodifica_dezena
 	RCALL Decodifica_unidade
-	RJMP Principal
+	RET
 
 Atraso:
 	LDI R17, 255
@@ -49,8 +49,8 @@ Decodifica_dezena:
 
 
 le_tab_dezena:
-	CBI PORTC,flagC
-	SBI PORTC,flagD
+	CBI PORTC,flagD
+	SBI PORTC,flagC
 	LPM R0, Z 
 	OUT DISPLAY, R0
 	RCALL Atraso
@@ -69,8 +69,8 @@ Decodifica_unidade:
 
 
 le_tab_unidade:
-	SBI PORTC,flagC
-	CBI PORTC,flagD
+	SBI PORTC,flagD
+	CBI PORTC,flagC
 	LPM R0, Z 
 	OUT DISPLAY, R0
 	RCALL Atraso
