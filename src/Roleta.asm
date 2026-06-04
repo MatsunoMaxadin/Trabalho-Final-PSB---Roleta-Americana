@@ -20,6 +20,7 @@
 .def AUX = R16
 .def dezena = R20
 .def unidade = R21
+.def flagModo = R22
 
 ; incluindo outras funçoes
 .include "Roletar.asm" 
@@ -37,10 +38,10 @@ LDI AUX, 0b00001111
 OUT PORTB, AUX ; ativando o pull-up para os botoes e desligando os LEDS
 LDI AUX, 0x00
 OUT PORTC, AUX ; ligando os displays
-LDI dezena, 0x00
+LDI dezena, 0x00 ; zerando os valores da roleta
 LDI unidade, 0x00
 LDI AUX, 0b00000100
-OUT DISPLAY, AUX
+OUT DISPLAY, AUX ; desligando o display
 
 Principal:
 	RCALL Decodifica_dezena
