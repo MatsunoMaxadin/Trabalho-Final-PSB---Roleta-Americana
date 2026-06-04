@@ -49,8 +49,8 @@ Decodifica_dezena:
 
 
 le_tab_dezena:
-	CBI PORTC,flagA
-	SBI PORTC,flagB
+	CBI PORTC,flagC
+	SBI PORTC,flagD
 	LPM R0, Z 
 	OUT DISPLAY, R0
 	RCALL Atraso
@@ -69,8 +69,8 @@ Decodifica_unidade:
 
 
 le_tab_unidade:
-	SBI PORTC,flagA
-	CBI PORTC,flagB
+	SBI PORTC,flagC
+	CBI PORTC,flagD
 	LPM R0, Z 
 	OUT DISPLAY, R0
 	RCALL Atraso
@@ -78,4 +78,4 @@ le_tab_unidade:
 	
 
 Tabela: 
-.db 0xBF, 0x86, 0xDB, 0xCF, 0xE6, 0xED, 0xFD, 0x87, 0xFF, 0xE7, 0xF7, 0xFC, 0xB9, 0xED, 0xF9, 0xF1
+.db 0x7F, 0x0E, 0xB7, 0x9F, 0xCE, 0xDB, 0xFB, 0x0F, 0xFF, 0xDF 
