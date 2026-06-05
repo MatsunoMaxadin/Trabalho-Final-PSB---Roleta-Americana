@@ -2,6 +2,9 @@
 
 Display:
 
+CPI flagSorteio, 0x00
+BRNE mostra_resultado
+
 testa_inicial: 
 CPI flagModo, 0x00; 
 BRNE testa_par
@@ -65,11 +68,10 @@ LDI AUX, 0xAC ; "N"
 RCALL decod_A
 LDI AUX, 0x84 ; "-"
 RCALL decod_B
-LDI AUX, 0xA
+MOV AUX, numEscolhido
 RCALL encontrar_dezena_e_unidade
-RCALL decod_D
-MOV AUX, AUXB ; envia o valor da dezena para AUX
-RCALL decod_C
+RCALL decod_Unidade
+RCALL decod_Dezena
 RET
 
 decod_A:
@@ -109,7 +111,6 @@ OUT DISPLAY, AUX
 RET
 
 encontrar_dezena_e_unidade:
-MOV AUX, numEscolhido
 LDI AUXB, 0x00
 div_10:
 
@@ -123,7 +124,56 @@ RJMP div_10
 FimDiv:
 RET
 
+decod_Unidade:
+
+LDI ZH, HIGH(Tabela << 1) 
+LDI ZL, LOW(Tabela << 1) 
+
+ADD ZL, AUX
+BRCC display_unidade
+	
+INC ZH 
+
+display_unidade:
+
+LPM R0, Z 
+MOV AUX, R0
+
+RCALL decod_D
+RET
 
 
 
 
+decod_Dezena:
+LDI ZH, HIGH(Tabela << 1) 
+LDI ZL, LOW(Tabela << 1) 
+
+ADD ZL, AUXB
+BRCC display_dezena
+	
+INC ZH 
+
+display_dezena:
+
+LPM R0, Z 
+MOV AUX, R0
+
+RCALL decod_D
+RET
+
+
+
+mostra_resultado:
+MOV AUX, resultado
+RCALL encontrar_dezena_e_unidade
+RCALL decod_Unidade
+RCALL decod_Dezena
+RET
+
+
+
+
+
+Tabela: 
+.db 0x7F, 0x0E, 0xB7, 0x9F, 0xCE, 0xDB, 0xFB, 0x0F, 0xFF, 0xDF 

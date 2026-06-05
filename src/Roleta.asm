@@ -24,6 +24,7 @@
 .def flagSorteio = R23
 .def AUX = R16
 .def AUXB = R24
+.def resultado = R25
 
 
 ; incluindo outras funçoes
@@ -46,6 +47,8 @@ LDI dezena, 0x00 ; zerando os valores da roleta
 LDI unidade, 0x00
 LDI AUX, 0b00000100
 OUT DISPLAY, AUX ; desligando o display
+LDI flagModo, 0x00 ; iniciando flagModo com 0
+LDI flagSorteio, 0x00 
 
 Principal:
 	RCALL Decodifica_dezena
