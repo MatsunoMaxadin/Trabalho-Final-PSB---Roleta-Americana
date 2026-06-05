@@ -17,7 +17,6 @@
 .equ BOTAOINC = PB1
 .equ BOTAODEC = PB2
 .equ ROLETAR = PB3
-.def AUX = R16
 .def dezena = R20
 .def unidade = R21
 .def flagModo = R22
@@ -25,11 +24,13 @@
 .def AUX = R16
 .def AUXB = R24
 .def resultado = R25
-.def contador = R26
+.def contador = R18
+.def numEscolhido = R19
 
 
 ; incluindo outras funçoes
 .include "Roletar.asm" 
+.include "Display.asm"
 
 .ORG 0x010
 
@@ -52,10 +53,4 @@ LDI flagModo, 0x00 ; iniciando flagModo com 0
 LDI flagSorteio, 0x00 
 
 Principal:
-	RCALL Decodifica_dezena
-        RCALL Decodifica_unidade
-	SBIS PINB, ROLETAR
-	RCALL Roleta
-	RCALL Decodifica_dezena
-	RCALL Decodifica_unidade
-	RJMP Principal
+	

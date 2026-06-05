@@ -1,11 +1,16 @@
 .ORG 0x090
 
-Display:
+Mostrar_Display:
 
+CPI flagSorteio, 0x00
+BREQ testa_inicial
 CPI flagSorteio, 0x01
-BRNE loop_roleta
-CPI flagSorteio, 0x02
-BRNE mostra_resultado
+BREQ jump_loop
+
+RJMP mostra_resultado
+
+jump_loop:
+RJMP loop_roleta
 
 testa_inicial: 
 CPI flagModo, 0x00; 
@@ -165,39 +170,57 @@ RCALL decod_D
 RET
 
 
-loop_roleta:
-
-
-
 mostra_resultado:
+LDI AUX, 0xAC ; "N"
+RCALL decod_A
+LDI AUX, 0x84 ; "-"
+RCALL decod_B
+CPI resultado, 0x25
+BREQ caso_0
 MOV AUX, resultado
 RCALL encontrar_dezena_e_unidade
 RCALL decod_Unidade
 RCALL decod_Dezena
 RET
+caso_0:
+LDI AUX, 0x00
+RCALL decod_C
+RET
 
 loop_roleta:
-
+LDI AUX, 0xAC ; "N"
+RCALL decod_A
+LDI AUX, 0x84 ; "-"
+RCALL decod_B
 LDI ZH, HIGH(Tabela_roleta << 1) 
 LDI ZL, LOW(Tabela_roleta << 1) 
 
 ADD ZL, contador
-BRCC display_roleta:
+BRCC display_roleta
 	
 INC ZH 
 
 display_roleta:
 
-LMP R0, Z
+LPM R0, Z
 MOV AUX, R0
 
 CPI contador, 0x04
 BRLO display_direita
-decod_C
-RET
+RCALL decod_C
+RJMP incrementa_contador
 display_direita:
-decod_D
+RCALL decod_D
+
+incrementa_contador:
+INC contador
+CPI contador, 0x08
+BREQ zerar_contador
 RET
+zerar_contador:
+LDI contador, 0x00
+RET
+
 
 
 

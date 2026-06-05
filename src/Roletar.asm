@@ -9,7 +9,7 @@ Roleta:
 	incrementa_resultado:
 	INC resultado
 	Decod:
-	RCALL Display
+	RCALL Mostrar_Display
 	RCALL Atraso
 	RJMP Roleta
 	
