@@ -25,6 +25,7 @@
 .def AUX = R16
 .def AUXB = R24
 .def resultado = R25
+.def contador = R26
 
 
 ; incluindo outras funçoes

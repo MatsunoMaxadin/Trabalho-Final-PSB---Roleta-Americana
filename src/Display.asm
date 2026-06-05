@@ -2,7 +2,9 @@
 
 Display:
 
-CPI flagSorteio, 0x00
+CPI flagSorteio, 0x01
+BRNE loop_roleta
+CPI flagSorteio, 0x02
 BRNE mostra_resultado
 
 testa_inicial: 
@@ -126,8 +128,8 @@ RET
 
 decod_Unidade:
 
-LDI ZH, HIGH(Tabela << 1) 
-LDI ZL, LOW(Tabela << 1) 
+LDI ZH, HIGH(Tabela_numero << 1) 
+LDI ZL, LOW(Tabela_numero << 1) 
 
 ADD ZL, AUX
 BRCC display_unidade
@@ -146,8 +148,8 @@ RET
 
 
 decod_Dezena:
-LDI ZH, HIGH(Tabela << 1) 
-LDI ZL, LOW(Tabela << 1) 
+LDI ZH, HIGH(Tabela_numero << 1) 
+LDI ZL, LOW(Tabela_numero << 1) 
 
 ADD ZL, AUXB
 BRCC display_dezena
@@ -163,6 +165,9 @@ RCALL decod_D
 RET
 
 
+loop_roleta:
+
+
 
 mostra_resultado:
 MOV AUX, resultado
@@ -171,9 +176,35 @@ RCALL decod_Unidade
 RCALL decod_Dezena
 RET
 
+loop_roleta:
+
+LDI ZH, HIGH(Tabela_roleta << 1) 
+LDI ZL, LOW(Tabela_roleta << 1) 
+
+ADD ZL, contador
+BRCC display_roleta:
+	
+INC ZH 
+
+display_roleta:
+
+LMP R0, Z
+MOV AUX, R0
+
+CPI contador, 0x04
+BRLO display_direita
+decod_C
+RET
+display_direita:
+decod_D
+RET
 
 
 
 
-Tabela: 
+
+Tabela_numero: 
 .db 0x7F, 0x0E, 0xB7, 0x9F, 0xCE, 0xDB, 0xFB, 0x0F, 0xFF, 0xDF 
+
+Tabela_roleta:
+.db 0xEF, 0xFE, 0x75, 0xBE,  0xBE, 0xF5, 0xE5, 0xEF
