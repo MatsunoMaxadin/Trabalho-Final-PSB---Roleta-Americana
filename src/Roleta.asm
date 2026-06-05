@@ -21,6 +21,7 @@
 .def unidade = R21
 .def flagModo = R22
 .def flagSorteio = R23
+.def flagLoop = R26
 .def AUX = R16
 .def AUXB = R24
 .def resultado = R25
@@ -31,8 +32,13 @@
 ; incluindo outras funçoes
 .include "Roletar.asm" 
 .include "Display.asm"
+.include "Interrupcao.asm"
 
-.ORG 0x010
+.ORG 0x000
+RJMP inicializacoes	; pula para o começo do programa
+
+.ORG 0X0002		; endereço reservado para interrupção INT0 - PD2
+JMP	Interrup	; pula para rotina de interrupção
 
 inicializacoes:
 LDI AUX, 0b11111011 
@@ -47,10 +53,24 @@ LDI AUX, 0x00
 OUT PORTC, AUX ; ligando os displays
 LDI dezena, 0x00 ; zerando os valores da roleta
 LDI unidade, 0x00
+
+; configuração da interrupção - borda de descida
+
+LDI AUX, 0b00000010		 
+STS EICRA, AUX		;	faz ISC00=0 e ISC01=1, assim configurando borda de descida através do registrador EICRA (que exige STS e não OUT)
+LDI AUX, 0b00000001	;	habilita a interrpção INT0 através do registrador EIMSK
+OUT EIMSK, AUX		
+SEI					;	habilita as interrupções através do bit I de SREG
+
+; fim da configuração de interrupção
+
 LDI AUX, 0b00000100
 OUT DISPLAY, AUX ; desligando o display
 LDI flagModo, 0x00 ; iniciando flagModo com 0
 LDI flagSorteio, 0x00 
+LDI flagLoop, 0x00
+
+
 
 Principal:
 	RCALL Mostrar_Display
