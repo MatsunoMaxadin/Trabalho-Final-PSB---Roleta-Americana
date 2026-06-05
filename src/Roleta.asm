@@ -21,6 +21,10 @@
 .def dezena = R20
 .def unidade = R21
 .def flagModo = R22
+.def flagSorteio = R23
+.def AUX = R16
+.def AUXB = R24
+
 
 ; incluindo outras funçoes
 .include "Roletar.asm" 
