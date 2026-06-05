@@ -53,4 +53,6 @@ LDI flagModo, 0x00 ; iniciando flagModo com 0
 LDI flagSorteio, 0x00 
 
 Principal:
-	
+	RCALL Mostrar_Display
+	RCALL Atraso
+	RJMP Principal

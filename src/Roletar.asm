@@ -20,6 +20,5 @@ Atraso:
 loop:
 	DEC R17
 	BRNE loop
-
 	RET
 

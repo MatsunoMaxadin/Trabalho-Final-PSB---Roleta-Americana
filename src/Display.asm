@@ -82,39 +82,43 @@ RCALL decod_Dezena
 RET
 
 decod_A:
-CBI PORTC, flagA ; habilitando apenas o display A
-SBI PORTC, flagB
-SBI PORTC, flagC
-SBI PORTC, flagD
+SBI PORTC, flagA ; habilitando apenas o display A
+CBI PORTC, flagB
+CBI PORTC, flagC
+CBI PORTC, flagD
 
 OUT DISPLAY, AUX
+RCALL Atraso
 RET
 
 decod_B:
-CBI PORTC, flagB ; habilitando apenas o display B
-SBI PORTC, flagA
-SBI PORTC, flagC
-SBI PORTC, flagD
+SBI PORTC, flagB ; habilitando apenas o display B
+CBI PORTC, flagA
+CBI PORTC, flagC
+CBI PORTC, flagD
 
 OUT DISPLAY, AUX
+RCALL Atraso
 RET
 
 decod_C:
-CBI PORTC, flagC ; habilitando apenas o display C
-SBI PORTC, flagA
-SBI PORTC, flagB
-SBI PORTC, flagD
+SBI PORTC, flagC ; habilitando apenas o display C
+CBI PORTC, flagA
+CBI PORTC, flagB
+CBI PORTC, flagD
 
 OUT DISPLAY, AUX
+RCALL Atraso
 RET
 
 decod_D:
-CBI PORTC, flagD ; habilitando apenas o display D
-SBI PORTC, flagA
-SBI PORTC, flagB
-SBI PORTC, flagC
+SBI PORTC, flagD ; habilitando apenas o display D
+CBI PORTC, flagA
+CBI PORTC, flagB
+CBI PORTC, flagC
 
 OUT DISPLAY, AUX
+RCALL Atraso
 RET
 
 encontrar_dezena_e_unidade:
