@@ -11,7 +11,7 @@
 .equ LEDVITORIA = PC1
 .equ LEDVERM = PC0
 .equ LEDPRET = PB5
-.equ LEDBRANCO = PB4
+.equ LEDVERDE = PB4
 .equ BOTAOSORTEIO = PD2
 .equ BOTAOMODO = PB0
 .equ BOTAOINC = PB1
@@ -74,15 +74,122 @@ LDI flagLoop, 0
 
 
 Principal:
-	RCALL Mostrar_Display
-	SBIC PINB, BOTAOMODO
-	RJMP Principal
-	LDI flagModo, 0x05
-	RCALL Escolher_numero
-	LDI flagLoop, 1
-	LDI flagSorteio, 0x01	
-	mostrando:
-	RCALL Mostrar_Display
-	
-	RJMP mostrando
-	
+    LDI flagModo, 0x00          ; registrador de modo começa em 0
+    LDI flagSorteio, 0x00       ; flag de sorteio limpa
+    LDI flagLoop, 0x00          ; flag de loop limpa
+
+    ; Apaga todos os LEDs (pull-up nos botões, LEDs desligados)
+    LDI AUX, 0b00001111
+    OUT PORTB, AUX
+    LDI AUX, 0x00
+    OUT PORTC, AUX
+
+    ; chama Display para mostrar tela inicial (modo 0 = tela PLAY)
+    RCALL Mostrar_Display
+
+
+; Loop principal: aguarda BOTAOMODO ou disparo do SORTEIO
+LoopPrincipal:
+    RCALL Mostrar_Display           ; atualiza display continuamente
+    ; --- Verifica BOTAOMODO (PB0) — ativo em LOW (pull-up) ---
+    SBIS PINB, BOTAOMODO            ; pula próxima se botão NÃO pressionado
+    RCALL TrataBotaoModo            ; botão pressionado: trata
+
+    ; verifica flagSorteio
+    CPI flagSorteio, 0x01
+    BREQ VerificaModo               ; se flag levantada, verifica modo
+    RJMP LoopPrincipal              ; senão continua no loop
+
+
+; verifica se (1 <= flagModo <= 5)
+VerificaModo:
+    LDI flagSorteio, 0x00           ; limpa a flag imediatamente
+
+    CPI flagModo, 0
+    BREQ ModoInvalido               ; modo 0 (tela PLAY) não sorteia
+
+    CPI flagModo, 6
+    BRSH ModoInvalido               ; modo >= 6 não existe (segurança)
+
+    ; Modo válido (1–5): aciona o sorteio
+    RCALL Sorteio                   ; chama função de sorteio
+
+    ; Após o sorteio, volta para o início
+    RJMP Principal
+
+ModoInvalido:
+    RJMP LoopPrincipal
+
+
+; ============================================================
+; TrataBotaoModo: debounce + cicla flagModo 0 -> 5 -> 0
+;                 e acende o LED correspondente ao modo
+; ============================================================
+TrataBotaoModo:
+    RCALL ATRASO                     ; debounce
+    ; Aguarda soltar o botão antes de registrar
+AguardaSoltarModo:
+    SBIS PINB, BOTAOMODO
+    RJMP AguardaSoltarModo          ; ainda pressionado: espera
+
+    INC flagModo
+    CPI flagModo, 6
+    BRNE AtualizaLEDsModo
+    LDI flagModo, 0x00              ; após modo 5, volta ao modo 0
+
+AtualizaLEDsModo:
+    ; Apaga todos os LEDs antes de acender o do modo atual
+    LDI AUX, 0b00001111
+    OUT PORTB, AUX                  ; desliga LEDPRET (PB5) e mantém pull-ups
+    LDI AUX, 0x00
+    OUT PORTC, AUX                  ; desliga todos LEDs da PORTC
+
+    ; Seleciona LED pelo modo
+    CPI flagModo, 0
+    BREQ LedModo0                   ; tela PLAY: nenhum LED especial
+
+    CPI flagModo, 1
+    BREQ LedModo1                   ; PAR: LED branco
+
+    CPI flagModo, 2
+    BREQ LedModo2                   ; ÍMPAR: LED branco (diferente do par se quiser)
+
+    CPI flagModo, 3
+    BREQ LedModo3                   ; VERMELHO: LED vermelho
+
+    CPI flagModo, 4
+    BREQ LedModo4                   ; PRETO: LED preto
+
+    CPI flagModo, 5
+    BREQ LedModo5                   ; Nº ESPECÍFICO: nenhum LED (INC/DEC disponíveis)
+
+    RET
+
+LedModo0:
+    ; Modo 0: tela PLAY — sem LED aceso
+    LDI dezena, 0x00
+    LDI unidade, 0x00
+    RET
+
+LedModo1:
+    ; PAR — acende LED branco
+    SBI PORTB, LEDVERDE
+    RET
+
+LedModo2:
+    ; ÍMPAR — acende LED verde
+    SBI PORTB, LEDVERDE
+    RET
+
+LedModo3:
+    ; VERMELHO — acende LED vermelho
+    SBI PORTC, LEDVERM
+    RET
+
+LedModo4:
+    SBI PORTB, LEDPRET
+    RET
+
+LedModo5:
+    RCALL Escolher_numero
+    RET
