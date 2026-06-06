@@ -170,7 +170,7 @@ display_dezena:
 LPM R0, Z 
 MOV AUX, R0
 
-RCALL decod_D
+RCALL decod_C
 RET
 
 

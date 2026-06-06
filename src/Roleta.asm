@@ -21,7 +21,7 @@
 .def unidade = R21
 .def flagModo = R22
 .def flagSorteio = R23
-.def flagLoop = R26
+.def flagLoop = R17
 .def AUX = R16
 .def AUXB = R24
 .def resultado = R25
@@ -33,6 +33,7 @@
 .include "Roletar.asm" 
 .include "Display.asm"
 .include "Interrupcao.asm"
+.include "Escolher_numero.asm"
 
 .ORG 0x000
 RJMP inicializacoes	; pula para o começo do programa
@@ -68,11 +69,20 @@ LDI AUX, 0b00000100
 OUT DISPLAY, AUX ; desligando o display
 LDI flagModo, 0x00 ; iniciando flagModo com 0
 LDI flagSorteio, 0x00 
-LDI flagLoop, 0x00
+LDI flagLoop, 0
 
 
 
 Principal:
 	RCALL Mostrar_Display
-	RCALL Atraso
+	SBIC PINB, BOTAOMODO
 	RJMP Principal
+	LDI flagModo, 0x05
+	RCALL Escolher_numero
+	LDI flagLoop, 1
+	LDI flagSorteio, 0x01	
+	mostrando:
+	RCALL Mostrar_Display
+	
+	RJMP mostrando
+	

@@ -1,6 +1,8 @@
 .ORG 0x030
 
 Roleta:
+	CPI flagLoop, 1
+	BRNE final_loop
 	
 	CPI resultado, 0X26
 	BRNE incrementa_resultado
@@ -15,10 +17,13 @@ Roleta:
 	
 
 Atraso:
-	LDI R17, 255
+	LDI AUX, 255
+	MOV R9, AUX
 
 loop:
-	DEC R17
+	DEC R9
 	BRNE loop
+	RET
+final_loop:
 	RET
 

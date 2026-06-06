@@ -8,15 +8,15 @@
 
 ; Definicoes 
 
-.def numEscolhido = R19 ; registrador que armazena o valor escolhido pelo usuario
-.def flagModo = R22 ; flag que seleciona os modos
 
-.equ BOTAOMODO = PB0
-.equ BOTAOINC = PB1
-.equ BOTAODEC = PB2
-.equ BOTAOGIRAR = PB3
+
+
 
 Escolher_numero:
+
+espera_soltar_modo:
+    SBIS PINB, BOTAOMODO
+    RJMP espera_soltar_modo
 
 LDI numEscolhido, 0 ; Numero comeca em 0
 
@@ -24,7 +24,7 @@ LDI numEscolhido, 0 ; Numero comeca em 0
 
 Verifica_botoes:
 	RCALL Mostrar_Display ; chama a funcao de display para mante-los acesos
-
+	
 	SBIS PINB, BOTAOINC ; verifica acionamento do botao
 	RJMP Incrementar
 
@@ -34,7 +34,7 @@ Verifica_botoes:
 	SBIS PINB, BOTAOMODO
 	RJMP Trocar_modo
 
-	SBIS PINB, BOTAOGIRAR
+	SBIS PINB, ROLETAR
 	RJMP Chama_roleta
 	
 	RJMP Verifica_botoes
@@ -42,7 +42,7 @@ Verifica_botoes:
 Incrementar:
 	RCALL Mostrar_Display
 	SBIS PINB, BOTAOINC
-	RJMP Incrementar ; Espera soltar o botao
+	RJMP Incrementar  ;Espera soltar o botao
 
 	CPI numEscolhido, 37 ; compara com 37
 	BRNE Faz_incremento
@@ -60,7 +60,7 @@ Incrementar:
 Decrementar:
 	RCALL Mostrar_Display
 	SBIS PINB, BOTAODEC
-	RJMP Decrementar ; Espera soltar o botao
+	RJMP Decrementar  ;Espera soltar o botao
 
 	CPI numEscolhido, 0 ; compara com 0
 	BRNE Faz_decremento
@@ -87,8 +87,9 @@ Trocar_modo:
 	RJMP Encerrar
 
 Chama_roleta:
+
 	RCALL Mostrar_Display
-	SBIS PINB, BOTAOGIRAR
+	SBIS PINB, ROLETAR
 	RJMP Chama_roleta
 
 	RCALL Roleta ; chama a funcao de girar a roleta
