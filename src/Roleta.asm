@@ -104,7 +104,7 @@ LoopPrincipal:
 
 ; verifica se (1 <= flagModo <= 5)
 VerificaModo:
-    LDI flagSorteio, 0x00           limpa a flag imediatamente
+    LDI flagSorteio, 0x00           ;limpa a flag imediatamente
 
     CPI flagModo, 0
     BREQ ModoInvalido               ; modo 0 (tela PLAY) não sorteia
