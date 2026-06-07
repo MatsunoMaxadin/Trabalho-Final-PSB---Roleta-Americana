@@ -16,7 +16,7 @@
 .equ BOTAOMODO = PB0
 .equ BOTAOINC = PB1
 .equ BOTAODEC = PB2
-.equ ROLETAR = PB3
+.equ BOTAOROLETAR = PB3
 .def dezena = R20
 .def unidade = R21
 .def flagModo = R22
@@ -62,7 +62,6 @@ LDI AUX, 0b00000010
 STS EICRA, AUX		;	faz ISC00=0 e ISC01=1, assim configurando borda de descida através do registrador EICRA (que exige STS e não OUT)
 LDI AUX, 0b00000001	;	habilita a interrpção INT0 através do registrador EIMSK
 OUT EIMSK, AUX		
-SEI					;	habilita as interrupções através do bit I de SREG
 
 ; fim da configuração de interrupção
 
@@ -78,6 +77,7 @@ Principal:
     LDI flagModo, 0x00          ; registrador de modo começa em 0
     LDI flagSorteio, 0x00       ; flag de sorteio limpa
     LDI flagLoop, 0x00          ; flag de loop limpa
+    CLI                         ; desativa interrupção
 
     ; Apaga todos os LEDs (pull-up nos botões, LEDs desligados)
     LDI AUX, 0b00001111
@@ -95,17 +95,17 @@ LoopPrincipal:
     ; --- Verifica BOTAOMODO (PB0) — ativo em LOW (pull-up) ---
     SBIS PINB, BOTAOMODO            ; pula próxima se botão NÃO pressionado
     RCALL TrataBotaoModo            ; botão pressionado: trata
+    SBIS PINB, ROLETAR
+    RJMP VerificaModo
     		
     ; verifica flagSorteio
-    CPI flagSorteio, 0x01
+    CPI flagSorteio, 1
     BREQ VerificaModo               ; se flag levantada, verifica modo
-    RJMP LoopPrincipal              ; senão continua no loop
+    RJMP              ; senão continua no loop
 
 
 ; verifica se (1 <= flagModo <= 5)
 VerificaModo:
-    LDI flagSorteio, 0x00           ;limpa a flag imediatamente
-
     CPI flagModo, 0
     BREQ ModoInvalido               ; modo 0 (tela PLAY) não sorteia
 
@@ -113,7 +113,9 @@ VerificaModo:
     BRSH ModoInvalido               ; modo >= 6 não existe (segurança)
 
     ; Modo válido (1–5): aciona o sorteio
-    RCALL Roleta                   ; chama função de sorteio
+    LDI flagSorteio, 0x01              
+    RCALL Roletar                   ; chama função de sorteio   
+    RCALL Resultado_roleta
 
     ; Após o sorteio, volta para o início
     RJMP Principal

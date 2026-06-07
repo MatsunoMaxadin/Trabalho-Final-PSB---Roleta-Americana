@@ -1,6 +1,7 @@
 .ORG 0x070
 
 Roleta:
+    SEI  ; habilita interrupção
 	CPI flagLoop, 1 ; Verifica se a flag para o loop está ativa.
 	BRNE final_loop ; Se não, encerra o loop.
 	
@@ -18,4 +19,5 @@ Roleta:
 
 
 final_loop:
+    CLI ; desabilita interrupção
 	RET ; Retorna para a rotina chamadora
