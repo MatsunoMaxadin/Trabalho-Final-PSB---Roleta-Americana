@@ -88,11 +88,11 @@ Trocar_modo:
 
 Chama_roleta:
 
-	RCALL Mostrar_Display
-	SBIS PINB, BOTAOROLETAR
-	RJMP Chama_roleta
+	;RCALL Mostrar_Display
+	;SBIS PINB, BOTAOROLETAR
+	;RJMP Chama_roleta
 
-	RCALL Roleta ; chama a funcao de girar a roleta
+	;RCALL Roleta ; chama a funcao de girar a roleta
 
 Encerrar:
 	RET
