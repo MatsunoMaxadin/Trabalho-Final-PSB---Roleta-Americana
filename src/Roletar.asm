@@ -1,4 +1,4 @@
-.ORG 0x030
+.ORG 0x070
 
 Roleta:
 	CPI flagLoop, 1
@@ -16,14 +16,7 @@ Roleta:
 	RJMP Roleta
 	
 
-Atraso:
-	LDI AUX, 255
-	MOV R9, AUX
 
-loop:
-	DEC R9
-	BRNE loop
-	RET
 final_loop:
 	RET
 

@@ -95,7 +95,7 @@ LoopPrincipal:
     ; --- Verifica BOTAOMODO (PB0) — ativo em LOW (pull-up) ---
     SBIS PINB, BOTAOMODO            ; pula próxima se botão NÃO pressionado
     RCALL TrataBotaoModo            ; botão pressionado: trata
-
+    		
     ; verifica flagSorteio
     CPI flagSorteio, 0x01
     BREQ VerificaModo               ; se flag levantada, verifica modo
@@ -104,7 +104,7 @@ LoopPrincipal:
 
 ; verifica se (1 <= flagModo <= 5)
 VerificaModo:
-    LDI flagSorteio, 0x00           ; limpa a flag imediatamente
+    LDI flagSorteio, 0x00           limpa a flag imediatamente
 
     CPI flagModo, 0
     BREQ ModoInvalido               ; modo 0 (tela PLAY) não sorteia
@@ -113,7 +113,7 @@ VerificaModo:
     BRSH ModoInvalido               ; modo >= 6 não existe (segurança)
 
     ; Modo válido (1–5): aciona o sorteio
-    RCALL Sorteio                   ; chama função de sorteio
+    RCALL Roleta                   ; chama função de sorteio
 
     ; Após o sorteio, volta para o início
     RJMP Principal
