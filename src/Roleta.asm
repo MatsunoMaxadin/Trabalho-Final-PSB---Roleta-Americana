@@ -95,13 +95,10 @@ LoopPrincipal:
     ; --- Verifica BOTAOMODO (PB0) — ativo em LOW (pull-up) ---
     SBIS PINB, BOTAOMODO            ; pula próxima se botão NÃO pressionado
     RCALL TrataBotaoModo            ; botão pressionado: trata
-    SBIS PINB, ROLETAR
+    SBIS PINB, BOTAOROLETAR ; verifica se botão para começar a roleta foi
     RJMP VerificaModo
-    		
-    ; verifica flagSorteio
-    CPI flagSorteio, 1
-    BREQ VerificaModo               ; se flag levantada, verifica modo
-    RJMP              ; senão continua no loop
+    	
+    RJMP LoopPrincipal            ; senão continua no loop
 
 
 ; verifica se (1 <= flagModo <= 5)
@@ -114,11 +111,9 @@ VerificaModo:
 
     ; Modo válido (1–5): aciona o sorteio
     LDI flagSorteio, 0x01              
-    RCALL Roletar                   ; chama função de sorteio   
-    RCALL Resultado_roleta
-
-    ; Após o sorteio, volta para o início
-    RJMP Principal
+    RCALL Roleta           
+    RCALL Avaliar_resultado
+    RJMP inicializacoes ; volta ao inicio após o sorteio
 
 ModoInvalido:
     RJMP LoopPrincipal

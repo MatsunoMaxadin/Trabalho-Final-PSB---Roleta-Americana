@@ -34,7 +34,7 @@ Verifica_botoes:
 	SBIS PINB, BOTAOMODO
 	RJMP Trocar_modo
 
-	SBIS PINB, ROLETAR
+	SBIS PINB, BOTAOROLETAR
 	RJMP Chama_roleta
 	
 	RJMP Verifica_botoes
@@ -89,7 +89,7 @@ Trocar_modo:
 Chama_roleta:
 
 	RCALL Mostrar_Display
-	SBIS PINB, ROLETAR
+	SBIS PINB, BOTAOROLETAR
 	RJMP Chama_roleta
 
 	RCALL Roleta ; chama a funcao de girar a roleta
