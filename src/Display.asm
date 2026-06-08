@@ -117,13 +117,17 @@ RCALL decod_B
 
 MOV AUX, numEscolhido ; Carrega o número escolhido
 
-RCALL encontrar_dezena_e_unidade ; Separa dezenas e unidades
+CPI AUX, 0x25 ; Compara o valor do número escolhido com 37 (decimal)
+BREQ pular_caso_0; Caso for, vai imprimir o número "0"
+RCALL encontrar_dezena_e_unidade ; Separa dezenas e unidades, caso o contrário, para imprimir o número normal.
 
 RCALL decod_Unidade ; Exibe unidade
 RCALL decod_Dezena ; Exibe dezena
 
 RET
 
+pular_caso_0:
+RJMP caso_0 ; RJMP para o caso 0, pois a rotina se encontra distante demais para o BREQ alcançar.
 ; ----------------------------------------------------------
 ; Rotinas de Multiplexação dos Displays
 ; Cada rotina habilita apenas um display e envia para ele
@@ -286,9 +290,9 @@ RET
 
 caso_0:
 
-LDI AUX, 0x00 
+LDI AUX, 0x7F
 
-RCALL decod_C ; imprime o valor 0 apenas no display C, deixando o display D vazio.
+RCALL decod_D ; imprime o valor 0 apenas no display D, deixando o display C vazio.
 
 RET
 

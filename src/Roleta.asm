@@ -94,6 +94,7 @@ LoopPrincipal:
     RCALL Mostrar_Display           ; atualiza display continuamente
     ; --- Verifica BOTAOMODO (PB0) — ativo em LOW (pull-up) ---
     SBIS PINB, BOTAOMODO            ; pula próxima se botão NÃO pressionado
+    return_modo: ; label para retornar da rotina de escolher número e atualizar flagModo
     RCALL TrataBotaoModo            ; botão pressionado: trata
     SBIS PINB, BOTAOROLETAR ; verifica se botão para começar a roleta foi pressionado
     RJMP VerificaModo
@@ -110,7 +111,9 @@ VerificaModo:
     BRSH ModoInvalido               ; modo >= 6 não existe (segurança)
 
     ; Modo válido (1–5): aciona o sorteio
-    LDI flagSorteio, 0x01              
+    LDI flagSorteio, 0x01 ; avisa ao display que está no modo animação de roleta
+	LDI flagLoop, 1       ; faz rodar o loop infinito
+	SEI					; ativa o serviço de interrupção      
     RCALL Roleta           
     RCALL Avaliar_resultado
     RJMP inicializacoes ; volta ao inicio após o sorteio
@@ -189,5 +192,5 @@ LedModo4:
     RET
 
 LedModo5:
-    RCALL Escolher_numero
-    RET
+    RJMP Escolher_numero
+  
