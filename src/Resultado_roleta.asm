@@ -92,7 +92,7 @@ loop_fim_jogo:
 	LDI R27, 0 ; Zera contador R27
 
 	INC R28
-	CPI R28, 15
+	CPI R28, 1
 	BRLO check_botao_sair
 	LDI R28, 0
 
@@ -122,7 +122,7 @@ espera_soltar_sair:
 	LDI flagSorteio, 0 ; Reseta flag, volta para Menu
 	LDI flagModo, 0 ; Reseta modo
 
-	RJMP Principal
+	RET
 
 Tabela_Cores:
 	.db 0, 1, 2, 1, 2, 1, 2, 1, 2, 1  ; Números 0 a 9
