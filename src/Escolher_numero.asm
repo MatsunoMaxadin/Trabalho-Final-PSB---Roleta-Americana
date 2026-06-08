@@ -1,48 +1,36 @@
 ;
-; Input_numero.asm
-; Author : Guilherme Meira
-; Funcao que habilita os botoes de incremento e decremento, alem de coletar o numero em que o usuario deseja apostar.
+; Função que verifica os botões de incremento e decremento, além de coletar o número em que o usuário deseja apostar.
 ;
 
 ;.include "m328Pdef.inc"
 
-; Definicoes 
-
-
-
-
-
 Escolher_numero:
 
-espera_soltar_modo:
-    SBIS PINB, BOTAOMODO
-    RJMP espera_soltar_modo
+LDI numEscolhido, 0 ; número comeca em 0
 
-LDI numEscolhido, 0 ; Numero comeca em 0
-
-; Loop Principal da funcao
+; Loop principal da função
 
 Verifica_botoes:
-	RCALL Mostrar_Display ; chama a funcao de display para mante-los acesos
+	RCALL Mostrar_Display ; chama a função de display para mantê-los acesos
 	
-	SBIS PINB, BOTAOINC ; verifica acionamento do botao
+	SBIS PINB, BOTAOINC ; verifica acionamento do botão
 	RJMP Incrementar
 
 	SBIS PINB, BOTAODEC
 	RJMP Decrementar
 
 	SBIS PINB, BOTAOMODO
-	RJMP Trocar_modo
+	RJMP return_modo ; vai para a parte do código do programa que chama o tratamento da alteração do modo
 
 	SBIS PINB, BOTAOROLETAR
-	RJMP Chama_roleta
+	RJMP VerificaModo ; vai para a parte do código do programa que irá chamar a rotina de roletar
 	
 	RJMP Verifica_botoes
 
 Incrementar:
 	RCALL Mostrar_Display
 	SBIS PINB, BOTAOINC
-	RJMP Incrementar  ;Espera soltar o botao
+	RJMP Incrementar  ; espera soltar o botão
 
 	CPI numEscolhido, 37 ; compara com 37
 	BRNE Faz_incremento
@@ -60,7 +48,7 @@ Incrementar:
 Decrementar:
 	RCALL Mostrar_Display
 	SBIS PINB, BOTAODEC
-	RJMP Decrementar  ;Espera soltar o botao
+	RJMP Decrementar  ; espera soltar o botão
 
 	CPI numEscolhido, 0 ; compara com 0
 	BRNE Faz_decremento
@@ -74,25 +62,3 @@ Decrementar:
 	Fim_dec:
 	RCALL Mostrar_Display
 	RJMP Verifica_botoes
-
-; Rotinas para sair do modo
-
-Trocar_modo:
-	RCALL Mostrar_Display
-	SBIS PINB, BOTAOMODO
-	RJMP Trocar_modo
-
-	LDI flagModo, 1 ; volta para o modo 1 (par)
-
-	RJMP Encerrar
-
-Chama_roleta:
-
-	;RCALL Mostrar_Display
-	;SBIS PINB, BOTAOROLETAR
-	;RJMP Chama_roleta
-
-	;RCALL Roleta ; chama a funcao de girar a roleta
-
-Encerrar:
-	RET
