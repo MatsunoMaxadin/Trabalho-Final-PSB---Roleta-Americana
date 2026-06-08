@@ -286,9 +286,9 @@ RET
 
 caso_0:
 
-LDI AUX, 0x00 
+LDI AUX, 0x7F
 
-RCALL decod_C ; imprime o valor 0 apenas no display C, deixando o display D vazio.
+RCALL decod_D ; imprime o valor 0 apenas no display D, deixando o display C vazio.
 
 RET
 
