@@ -4,8 +4,8 @@ Roleta:
 	CPI flagLoop, 1 ; Verifica se a flag para o loop está ativa.
 	BRNE final_loop ; Se não, encerra o loop.
 	
-	CPI resultado, 0X26 ; Confere se o resultado chegou no valor máximo (37).
-	BRNE incrementa_resultado ; Se não, incrementa
+	CPI resultado, 0X25 ; Confere se o resultado chegou no valor máximo (37).
+	BRLO incrementa_resultado ; Se não, incrementa
 	LDI resultado, 0x00 ; Se sim, Zera o valor
 	RJMP Decod ; Pula para a rotina de decodificação
 	incrementa_resultado:
