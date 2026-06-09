@@ -115,7 +115,7 @@ ModoInvalido:
 ;                 e acende o LED correspondente ao modo
 ; ============================================================
 TrataBotaoModo:
-    RCALL ATRASO                     ; debounce
+    RCALL Atraso                     ; debounce
     ; Aguarda soltar o botão antes de registrar
 AguardaSoltarModo:
 	RCALL Mostrar_Display
