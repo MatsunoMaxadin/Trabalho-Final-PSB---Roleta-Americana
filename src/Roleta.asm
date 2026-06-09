@@ -68,6 +68,7 @@ Principal:
 ; Loop principal: aguarda BOTAOMODO ou disparo do SORTEIO
 LoopPrincipal:
     RCALL Mostrar_Display           ; atualiza display continuamente
+	CLI								; garante interrupção desativada
     ; --- Verifica BOTAOMODO (PB0) — ativo em LOW (pull-up) ---
     SBIS PINB, BOTAOMODO            ; pula próxima se botão NÃO pressionado
     RCALL TrataBotaoModo            ; botão pressionado: trata
@@ -79,7 +80,13 @@ LoopPrincipal:
 
 ; verifica se (1 <= flagModo <= 5)
 VerificaModo:
-    CPI flagModo, 0
+    RCALL ATRASO                     ; debounce
+    ; Aguarda soltar o botão antes de registrar
+	AguardaSoltarRoletar:
+	RCALL Mostrar_Display
+    SBIS PINB, BOTAOROLETAR
+    RJMP AguardaSoltarRoletar          ; ainda pressionado: espera
+	CPI flagModo, 0
     BREQ ModoInvalido               ; modo 0 (tela PLAY) não sorteia
 
     CPI flagModo, 6
@@ -88,6 +95,12 @@ VerificaModo:
     ; Modo válido (1–5): aciona o sorteio
     LDI flagSorteio, 0x01 ; avisa ao display que está no modo animação de roleta
 	LDI flagLoop, 1       ; faz rodar o loop infinito
+	
+	;  LIMPANDO A SUJEIRA DA INTERRUPÇÃO FORA DE HORA 
+    LDI AUX, 0b00000001   ; Carrega 1 na posição da flag INT0
+    OUT EIFR, AUX         ; Limpa qualquer clique fora de hora no PD2
+    ; 
+
 	SEI					; ativa o serviço de interrupção      
     RCALL Roleta           
     RCALL Avaliar_resultado
@@ -105,6 +118,7 @@ TrataBotaoModo:
     RCALL ATRASO                     ; debounce
     ; Aguarda soltar o botão antes de registrar
 AguardaSoltarModo:
+	RCALL Mostrar_Display
     SBIS PINB, BOTAOMODO
     RJMP AguardaSoltarModo          ; ainda pressionado: espera
 
