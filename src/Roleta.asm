@@ -35,6 +35,7 @@
 .include "Interrupcao.asm"
 .include "Escolher_numero.asm"
 .include "Resultado_roleta.asm"
+.include "Atraso.asm"
 
 .ORG 0x000
 RJMP inicializacoes	; pula para o começo do programa
