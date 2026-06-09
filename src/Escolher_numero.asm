@@ -14,23 +14,24 @@ Verifica_botoes:
 	RCALL Mostrar_Display ; chama a função de display para mantê-los acesos
 	
 	SBIS PINB, BOTAOINC ; verifica acionamento do botão
-	RJMP Incrementar
+	RCALL Incrementar
 
 	SBIS PINB, BOTAODEC
-	RJMP Decrementar
+	RCALL Decrementar
 
 	SBIS PINB, BOTAOMODO
-	RJMP return_modo ; vai para a parte do código do programa que chama o tratamento da alteração do modo
+	RET ; volta para o fluxo principal
 
 	SBIS PINB, BOTAOROLETAR
-	RJMP VerificaModo ; vai para a parte do código do programa que irá chamar a rotina de roletar
+	RET ; volta para o fluxo principal
 	
 	RJMP Verifica_botoes
 
 Incrementar:
+	espera_soltar_soma:
 	RCALL Mostrar_Display
 	SBIS PINB, BOTAOINC
-	RJMP Incrementar  ; espera soltar o botão
+	RJMP espera_soltar_soma ; espera soltar o botão
 
 	CPI numEscolhido, 37 ; compara com 37
 	BRNE Faz_incremento
@@ -43,12 +44,13 @@ Incrementar:
 
 	Fim_inc:
 	RCALL Mostrar_Display
-	RJMP Verifica_botoes
+	RET
 
 Decrementar:
+	espera_soltar_sub:
 	RCALL Mostrar_Display
 	SBIS PINB, BOTAODEC
-	RJMP Decrementar  ; espera soltar o botão
+	RJMP espera_soltar_sub  ; espera soltar o botão
 
 	CPI numEscolhido, 0 ; compara com 0
 	BRNE Faz_decremento
@@ -61,4 +63,4 @@ Decrementar:
 
 	Fim_dec:
 	RCALL Mostrar_Display
-	RJMP Verifica_botoes
+	RET

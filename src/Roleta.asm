@@ -94,7 +94,6 @@ LoopPrincipal:
     RCALL Mostrar_Display           ; atualiza display continuamente
     ; --- Verifica BOTAOMODO (PB0) — ativo em LOW (pull-up) ---
     SBIS PINB, BOTAOMODO            ; pula próxima se botão NÃO pressionado
-    return_modo: ; label para retornar da rotina de escolher número e atualizar flagModo
     RCALL TrataBotaoModo            ; botão pressionado: trata
     SBIS PINB, BOTAOROLETAR ; verifica se botão para começar a roleta foi pressionado
     RJMP VerificaModo
@@ -192,5 +191,6 @@ LedModo4:
     RET
 
 LedModo5:
-    RJMP Escolher_numero
+    RCALL Escolher_numero
+	RET
   
