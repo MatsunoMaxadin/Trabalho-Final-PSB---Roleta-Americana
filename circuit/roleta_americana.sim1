@@ -18,8 +18,6 @@
 
 <item itemtype="Seven Segment" CircId="Seven Segment-81" mainComp="false" Show_id="false" Show_Val="false" Pos="320,-168" rotation="0" hflip="1" vflip="1" label="Seven Segment-81" idLabPos="20,-44" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Red" NumDisplays="1" Vertical_Pins="true" CommonCathode="true" Threshold="2.4 V" MaxCurrent="20 mA" Resistance="1 Ω" />
 
-<item itemtype="Resistor" CircId="Resistor-97" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="0,48" rotation="-270" hflip="1" vflip="1" label="Resistor-97" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="330 Ω" />
-
 <item itemtype="Resistor" CircId="Resistor-102" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="-168,184" rotation="0" hflip="1" vflip="1" label="Resistor-102" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="330 Ω" />
 
 <item itemtype="Resistor" CircId="Resistor-113" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="-168,208" rotation="0" hflip="1" vflip="1" label="Resistor-113" idLabPos="-16,-24" labelrot="0" valLabPos="-12.6784,5.4464" valLabRot="0" Resistance="330 Ω" />
@@ -48,7 +46,7 @@
 
 <item itemtype="TextComponent" CircId="TextComponent-164" mainComp="false" Show_id="false" Show_Val="false" Pos="-344,216" rotation="0" hflip="1" vflip="1" label="TextComponent-164" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Margin="5 _px" Border="1 _px" Color="#ffffdc" Opacity="1" Font="Helvetica [Cronyx]" Font_Color="#000000" Font_Size="6 _px" Fixed_Width="true" Text="Decrementar" />
 
-<item itemtype="TextComponent" CircId="TextComponent-165" mainComp="false" Show_id="false" Show_Val="false" Pos="-336,256" rotation="0" hflip="1" vflip="1" label="TextComponent-165" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Margin="5 _px" Border="1 _px" Color="#ffffdc" Opacity="1" Font="Helvetica [Cronyx]" Font_Color="#000000" Font_Size="6 _px" Fixed_Width="true" Text="Selecionar" />
+<item itemtype="TextComponent" CircId="TextComponent-165" mainComp="false" Show_id="false" Show_Val="false" Pos="-336,256" rotation="0" hflip="1" vflip="1" label="TextComponent-165" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Margin="5 _px" Border="1 _px" Color="#ffffdc" Opacity="1" Font="Helvetica [Cronyx]" Font_Color="#000000" Font_Size="6 _px" Fixed_Width="true" Text="Roletar" />
 
 <item itemtype="Resistor" CircId="Resistor-9" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="-104,-256" rotation="0" hflip="-1" vflip="1" label="Resistor-9" idLabPos="-16,-24" labelrot="0" valLabPos="-11.9265,-4.9341" valLabRot="0" Resistance="330 Ω" />
 
@@ -77,6 +75,8 @@
 <item itemtype="Subcircuit" CircId="Uno-45" mainComp="false" Show_id="true" Show_Val="false" Pos="-188,-56" rotation="0" hflip="1" vflip="1" label="Uno-45" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Logic_Symbol="false">
 <mainCompProps MainCompId="mega328-109" Frequency="16 MHz" Program="../src/Roleta.hex" Auto_Load="false" saveEepr="true" MainMcu="true" SerialMon="-1" />
 </item>
+
+<item itemtype="Resistor" CircId="Resistor-253" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="-76,232" rotation="-360" hflip="1" vflip="1" label="Resistor-253" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="330 Ω" />
 
 <item itemtype="Node" CircId="Node-152" mainComp="false" Pos="144,-68" />
 
@@ -181,8 +181,6 @@
 <item itemtype="Connector" uid="Connector-527" startpinid="Node-169-2" endpinid="Push-67-pinP0" pointList="-284,224,-276,224" />
 
 <item itemtype="Connector" uid="Connector-690" startpinid="Resistor-102-rPin" endpinid="Led-209-lPin" pointList="-152,184,-140,184" />
-
-<item itemtype="Connector" uid="Connector-701" startpinid="Led-213-lPin" endpinid="Resistor-97-rPin" pointList="-104,232,0,232,0,64" />
 
 <item itemtype="Connector" uid="Connector-703" startpinid="Node-214-1" endpinid="Led-213-rPin" pointList="-284,260,-284,292,-208,292,-208,232,-136,232" />
 
@@ -346,10 +344,12 @@
 
 <item itemtype="Connector" uid="Connector-493" startpinid="Resistor-155-lPin" endpinid="Uno-45-A5" pointList="-32,-92,-36,-92,-36,-40" />
 
-<item itemtype="Connector" uid="Connector-295" startpinid="Uno-45-A0" endpinid="Resistor-97-lPin" pointList="-36,0,0,0,0,32" />
-
 <item itemtype="Connector" uid="Connector-195" startpinid="Uno-45-2" endpinid="Push-27-switch0pinN" pointList="-180,-24,-244,-24,-244,112" />
 
 <item itemtype="Connector" uid="Connector-818" startpinid="Resistor-8-rPin" endpinid="Node-242-0" pointList="-88,-248,8,-248,8,-124,28,-124" />
+
+<item itemtype="Connector" uid="Connector-866" startpinid="Led-213-lPin" endpinid="Resistor-253-lPin" pointList="-104,232,-92,232" />
+
+<item itemtype="Connector" uid="Connector-867" startpinid="Uno-45-A0" endpinid="Resistor-253-rPin" pointList="-36,0,-8,0,-8,232,-60,232" />
 
 </circuit>
