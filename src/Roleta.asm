@@ -31,6 +31,7 @@ LDI AUX, 0x00
 OUT PORTC, AUX ; ligando os displays
 LDI dezena, 0x00 ; zerando os valores da roleta
 LDI unidade, 0x00
+LDI contador, 0x00
 
 ; configuração da interrupção - borda de descida
 
@@ -115,7 +116,7 @@ ModoInvalido:
 ;                 e acende o LED correspondente ao modo
 ; ============================================================
 TrataBotaoModo:
-    RCALL ATRASO                     ; debounce
+    RCALL Atraso                     ; debounce
     ; Aguarda soltar o botão antes de registrar
 AguardaSoltarModo:
 	RCALL Mostrar_Display
