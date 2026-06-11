@@ -70,7 +70,7 @@
 
 <item itemtype="Resistor" CircId="Resistor-96" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="60,-8" rotation="0" hflip="1" vflip="1" label="Resistor-96" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="330 Ω" />
 
-<item itemtype="Led" CircId="Led-216" mainComp="false" Show_id="false" Show_Val="false" Pos="88,8" rotation="-270" hflip="1" vflip="1" label="Led-216" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="White" Grounded="false" Threshold="4 V" MaxCurrent="30 mA" Resistance="0.6 Ω" />
+<item itemtype="Led" CircId="Led-216" mainComp="false" Show_id="false" Show_Val="false" Pos="88,8" rotation="-270" hflip="1" vflip="1" label="Led-216" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="30 mA" Resistance="0.6 Ω" />
 
 <item itemtype="Subcircuit" CircId="Uno-45" mainComp="false" Show_id="true" Show_Val="false" Pos="-188,-56" rotation="0" hflip="1" vflip="1" label="Uno-45" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Logic_Symbol="false">
 <mainCompProps MainCompId="mega328-109" Frequency="16 MHz" Program="../src/Roleta.hex" Auto_Load="false" saveEepr="true" MainMcu="true" SerialMon="-1" />
