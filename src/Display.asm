@@ -6,8 +6,6 @@
 ; - A animação da roleta;
 ; - O resultado final do sorteio.
 
-.ORG 0x090
-
 Mostrar_Display:
 
 CPI flagSorteio, 0x00 ; Verifica se o sorteio ainda não começou
