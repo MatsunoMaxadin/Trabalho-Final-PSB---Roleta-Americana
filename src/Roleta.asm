@@ -31,6 +31,7 @@ LDI AUX, 0x00
 OUT PORTC, AUX ; ligando os displays
 LDI dezena, 0x00 ; zerando os valores da roleta
 LDI unidade, 0x00
+LDI contador, 0x00
 
 ; configuração da interrupção - borda de descida
 
