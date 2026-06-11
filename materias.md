@@ -1,4 +1,3 @@
-# 3. Documentação do Projeto
 ## 3.1. Relação de materiais utilizados
 - 1 arduino uno (ATmega328P)
 - 4 displays de 7 segmentos cátodo comum
