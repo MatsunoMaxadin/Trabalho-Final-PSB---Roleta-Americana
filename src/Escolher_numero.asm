@@ -28,10 +28,12 @@ Verifica_botoes:
 	RJMP Verifica_botoes
 
 Incrementar:
+	RCALL Atraso		; debounce precionar
 	espera_soltar_soma:
 	RCALL Mostrar_Display
 	SBIS PINB, BOTAOINC
 	RJMP espera_soltar_soma ; espera soltar o botão
+	RCALL Atraso		; debounce soltar
 
 	CPI numEscolhido, 37 ; compara com 37
 	BRNE Faz_incremento
@@ -47,10 +49,12 @@ Incrementar:
 	RET
 
 Decrementar:
+	RCALL Atraso			; debounce pressionar
 	espera_soltar_sub:
 	RCALL Mostrar_Display
 	SBIS PINB, BOTAODEC
 	RJMP espera_soltar_sub  ; espera soltar o botão
+	RCALL Atraso			; debounce soltar
 
 	CPI numEscolhido, 0 ; compara com 0
 	BRNE Faz_decremento

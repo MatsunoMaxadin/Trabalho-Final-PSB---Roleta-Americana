@@ -81,12 +81,13 @@ LoopPrincipal:
 
 ; verifica se (1 <= flagModo <= 5)
 VerificaModo:
-    RCALL ATRASO                     ; debounce
+    RCALL ATRASO                     ; debounce pressionar
     ; Aguarda soltar o botão antes de registrar
 	AguardaSoltarRoletar:
 	RCALL Mostrar_Display
     SBIS PINB, BOTAOROLETAR
     RJMP AguardaSoltarRoletar          ; ainda pressionado: espera
+	RCALL Atraso					; debounce soltar
 	CPI flagModo, 0
     BREQ ModoInvalido               ; modo 0 (tela PLAY) não sorteia
 
@@ -116,12 +117,13 @@ ModoInvalido:
 ;                 e acende o LED correspondente ao modo
 ; ============================================================
 TrataBotaoModo:
-    RCALL Atraso                     ; debounce
+    RCALL Atraso                     ; debounce ao pressionar
     ; Aguarda soltar o botão antes de registrar
 AguardaSoltarModo:
 	RCALL Mostrar_Display
     SBIS PINB, BOTAOMODO
     RJMP AguardaSoltarModo          ; ainda pressionado: espera
+	RCALL Atraso					; debounce soltar
 
     INC flagModo
     CPI flagModo, 6
