@@ -3,15 +3,7 @@
 .include "definicoes.inc"
 .list
 
-; incluindo outras funçoes
-.nolist
-.include "Roletar.asm" 
-.include "Display.asm"
-.include "Interrupcao.asm"
-.include "Escolher_numero.asm"
-.include "Resultado_roleta.asm"
-.include "Atrasos.asm"
-.list
+
 .ORG 0x000
 RJMP inicializacoes	; pula para o começo do programa
 
@@ -117,13 +109,13 @@ ModoInvalido:
 ;                 e acende o LED correspondente ao modo
 ; ============================================================
 TrataBotaoModo:
-    RCALL Atraso                     ; debounce ao pressionar
+    RCALL Atraso_Debounce                     ; debounce ao pressionar
     ; Aguarda soltar o botão antes de registrar
 AguardaSoltarModo:
 	RCALL Mostrar_Display
     SBIS PINB, BOTAOMODO
     RJMP AguardaSoltarModo          ; ainda pressionado: espera
-	RCALL Atraso					; debounce soltar
+	RCALL Atraso_Debounce					; debounce soltar
 
     INC flagModo
     CPI flagModo, 6
@@ -186,4 +178,15 @@ LedModo4:
 LedModo5:
     RCALL Escolher_numero
 	RET
+
+
+; incluindo outras funçoes
+.nolist
+.include "Roletar.asm" 
+.include "Display.asm"
+.include "Interrupcao.asm"
+.include "Escolher_numero.asm"
+.include "Resultado_roleta.asm"
+.include "Atrasos.asm"
+.list
   

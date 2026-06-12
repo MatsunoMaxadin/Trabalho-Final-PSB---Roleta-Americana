@@ -2,7 +2,6 @@
 ; Função que verifica os botões de incremento e decremento, além de coletar o número em que o usuário deseja apostar.
 ;
 
-;.include "m328Pdef.inc"
 
 Escolher_numero:
 
@@ -28,12 +27,12 @@ Verifica_botoes:
 	RJMP Verifica_botoes
 
 Incrementar:
-	RCALL Atraso		; debounce precionar
+	RCALL Atraso_Debounce		; debounce precionar
 	espera_soltar_soma:
 	RCALL Mostrar_Display
 	SBIS PINB, BOTAOINC
 	RJMP espera_soltar_soma ; espera soltar o botão
-	RCALL Atraso		; debounce soltar
+	RCALL Atraso_Debounce		; debounce soltar
 
 	CPI numEscolhido, 37 ; compara com 37
 	BRNE Faz_incremento
@@ -49,12 +48,12 @@ Incrementar:
 	RET
 
 Decrementar:
-	RCALL Atraso			; debounce pressionar
+	RCALL Atraso_Debounce			; debounce pressionar
 	espera_soltar_sub:
 	RCALL Mostrar_Display
 	SBIS PINB, BOTAODEC
 	RJMP espera_soltar_sub  ; espera soltar o botão
-	RCALL Atraso			; debounce soltar
+	RCALL Atraso_Debounce			; debounce soltar
 
 	CPI numEscolhido, 0 ; compara com 0
 	BRNE Faz_decremento
