@@ -63,3 +63,14 @@ DEC R7 ; Quando R8 chega a zero, decrementa R7
 BRNE loop_maior ; Se R7 não for zero, reinicia todo o processo
 
 RET ; Retorna para a rotina chamadora
+
+
+Atraso_Debounce:		; atraso para o debounce dos botões
+    LDI R29, 150            
+
+loop_debounce:
+    RCALL Mostrar_Display   ; Atualiza os displays para não "apagarem"
+    DEC R29                 
+    BRNE loop_debounce
+    
+    RET   

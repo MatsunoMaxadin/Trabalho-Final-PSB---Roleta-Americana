@@ -3,15 +3,7 @@
 .include "definicoes.inc"
 .list
 
-; incluindo outras funçoes
-.nolist
-.include "Roletar.asm" 
-.include "Display.asm"
-.include "Interrupcao.asm"
-.include "Escolher_numero.asm"
-.include "Resultado_roleta.asm"
-.include "Atrasos.asm"
-.list
+
 .ORG 0x000
 RJMP inicializacoes	; pula para o começo do programa
 
@@ -81,12 +73,13 @@ LoopPrincipal:
 
 ; verifica se (1 <= flagModo <= 5)
 VerificaModo:
-    RCALL ATRASO                     ; debounce
+    RCALL ATRASO                     ; debounce pressionar
     ; Aguarda soltar o botão antes de registrar
 	AguardaSoltarRoletar:
 	RCALL Mostrar_Display
     SBIS PINB, BOTAOROLETAR
     RJMP AguardaSoltarRoletar          ; ainda pressionado: espera
+	RCALL Atraso					; debounce soltar
 	CPI flagModo, 0
     BREQ ModoInvalido               ; modo 0 (tela PLAY) não sorteia
 
@@ -116,12 +109,13 @@ ModoInvalido:
 ;                 e acende o LED correspondente ao modo
 ; ============================================================
 TrataBotaoModo:
-    RCALL Atraso                     ; debounce
+    RCALL Atraso_Debounce                     ; debounce ao pressionar
     ; Aguarda soltar o botão antes de registrar
 AguardaSoltarModo:
 	RCALL Mostrar_Display
     SBIS PINB, BOTAOMODO
     RJMP AguardaSoltarModo          ; ainda pressionado: espera
+	RCALL Atraso_Debounce					; debounce soltar
 
     INC flagModo
     CPI flagModo, 6
@@ -184,4 +178,15 @@ LedModo4:
 LedModo5:
     RCALL Escolher_numero
 	RET
+
+
+; incluindo outras funçoes
+.nolist
+.include "Roletar.asm" 
+.include "Display.asm"
+.include "Interrupcao.asm"
+.include "Escolher_numero.asm"
+.include "Resultado_roleta.asm"
+.include "Atrasos.asm"
+.list
   

@@ -1,1 +1,0 @@
-## 3.2. Prints do diagrama no SimulIDE
