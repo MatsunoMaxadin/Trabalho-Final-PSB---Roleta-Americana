@@ -42,22 +42,24 @@
 
 ## 3.2.3. Prints dos Leds
 
-3.2.3.1 Leds das Cores desligados
+3.2.3.1 Leds das Cores desligados:
 ![Leds das cores desligados](../assets/leds_cores_desligados.png)
 
-3.2.3.2 Led Verde ligado
+3.2.3.2 Led Verde ligado:
 ![Led verde ligado](../assets/leds_cores_verde_ligado.png)
 
-3.2.3.3 Led Azul ligado
+3.2.3.3 Led Azul ligado:
 ![Led azul ligado](../assets/leds_cores_azul_ligado.png)
 
-3.2.3.4 Led Vermelho ligado
+3.2.3.4 Led Vermelho ligado:
 ![Led vermelho ligado](../assets/leds_cores_vermelho_ligado.png)
 
-3.2.3.5 Led Vitória desligado
+3.2.3.5 Led Vitória desligado:
+
 ![Led vitória desligado](../assets/led_vitória_desligado.png)
 
-3.2.3.6 Led Vitória ligado
+3.2.3.6 Led Vitória ligado:
+
 ![Led vitória ligado](../assets/led_vitória_ligado.png)
 
 ## 3.2.4. Print do Arduíno Uno
