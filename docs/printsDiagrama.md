@@ -23,7 +23,7 @@
 3.2.1.7 Circuito modo Número Específico:
 ![circuito modo preto](../assets/circuito_modo_num_especifico.png)
 
-##3.2.2. Prints do Display
+## 3.2.2. Prints do Display
 
 3.2.2.1 Display modo Par:
 ![Display modo Par](../assets/Display_modo_par.png)
@@ -40,7 +40,7 @@
 3.2.2.5 Display modo Número Específico:
 ![Display modo Número Específico](../assets/Display_modo_num_específico.png)
 
-##3.2.3. Prints dos Leds
+## 3.2.3. Prints dos Leds
 
 3.2.3.1 Leds das Cores desligados
 ![Leds das cores desligados](../assets/leds_cores_desligados.png)
@@ -55,12 +55,12 @@
 ![Led vermelho ligado](../assets/leds_cores_vermelho_ligado.png)
 
 3.2.3.5 Led Vitória desligado
-![Led vitória desligado](../assets/led_vitória_desligado)
+![Led vitória desligado](../assets/led_vitória_desligado.png)
 
 3.2.3.6 Led Vitória ligado
-![Led vitória ligado](../assets/led_vitória_ligado)
+![Led vitória ligado](../assets/led_vitória_ligado.png)
 
-##3.2.4. Print do Arduíno Uno
+## 3.2.4. Print do Arduíno Uno
 
 ![Arduíno Uno](../assets/Arduíno_UNO.png)
 
