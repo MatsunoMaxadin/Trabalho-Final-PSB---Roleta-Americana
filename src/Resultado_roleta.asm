@@ -108,11 +108,13 @@ apaga_vitoria:
 check_botao_sair:
 	SBIC PINB, BOTAOMODO ; Verifica se Botão Modo foi pressionado
 	RJMP loop_fim_jogo ; Enquanto não pressionar, continua exibindo resultado/piscando LEDS
+	RCALL Atraso_Debounce                     ; debounce ao pressionar
 
 espera_soltar_sair:
 	RCALL Mostrar_Display 
 	SBIS PINB, BOTAOMODO
 	RJMP espera_soltar_sair ; Loop até soltar botão
+	RCALL Atraso_Debounce                     ; debounce ao soltar
 
 	CBI PORTC, LEDVITORIA ; Apaga LED de Vitória
 	CBI PORTC, LEDVERM ; Apaga LED Vermelho
