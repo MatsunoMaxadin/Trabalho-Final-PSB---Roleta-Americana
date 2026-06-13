@@ -84,14 +84,6 @@
 
 <item itemtype="Node" CircId="Node-154" mainComp="false" Pos="240,-68" />
 
-<item itemtype="Node" CircId="Node-167" mainComp="false" Pos="-284,148" />
-
-<item itemtype="Node" CircId="Node-168" mainComp="false" Pos="-284,188" />
-
-<item itemtype="Node" CircId="Node-169" mainComp="false" Pos="-284,224" />
-
-<item itemtype="Node" CircId="Node-214" mainComp="false" Pos="-284,260" />
-
 <item itemtype="Node" CircId="Node-217" mainComp="false" Pos="12,24" />
 
 <item itemtype="Node" CircId="Node-220" mainComp="false" Pos="216,-208" />
@@ -140,7 +132,17 @@
 
 <item itemtype="Node" CircId="Node-210" mainComp="false" Pos="-24,24" />
 
-<item itemtype="Node" CircId="Node-166" mainComp="false" Pos="-284,112" />
+<item itemtype="Node" CircId="Node-255" mainComp="false" Pos="0,24" />
+
+<item itemtype="Node" CircId="Node-256" mainComp="false" Pos="-276,260" />
+
+<item itemtype="Node" CircId="Node-257" mainComp="false" Pos="-276,224" />
+
+<item itemtype="Node" CircId="Node-258" mainComp="false" Pos="-276,188" />
+
+<item itemtype="Node" CircId="Node-259" mainComp="false" Pos="-276,152" />
+
+<item itemtype="Node" CircId="Node-262" mainComp="false" Pos="-200,320" />
 
 <item itemtype="Connector" uid="Connector-453" startpinid="Seven Segment-2-pin_commona" endpinid="BJT-145-collector" pointList="52,-136,52,-108" />
 
@@ -170,23 +172,7 @@
 
 <item itemtype="Connector" uid="Connector-510" startpinid="Resistor-160-rPin" endpinid="BJT-148-base" pointList="292,-92,304,-92" />
 
-<item itemtype="Connector" uid="Connector-521" startpinid="Node-167-2" endpinid="Push-64-pinP0" pointList="-284,148,-276,148" />
-
-<item itemtype="Connector" uid="Connector-523" startpinid="Node-167-1" endpinid="Node-168-0" pointList="-284,148,-284,188" />
-
-<item itemtype="Connector" uid="Connector-524" startpinid="Node-168-2" endpinid="Push-66-pinP0" pointList="-284,188,-276,188" />
-
-<item itemtype="Connector" uid="Connector-526" startpinid="Node-168-1" endpinid="Node-169-0" pointList="-284,188,-284,224" />
-
-<item itemtype="Connector" uid="Connector-527" startpinid="Node-169-2" endpinid="Push-67-pinP0" pointList="-284,224,-276,224" />
-
 <item itemtype="Connector" uid="Connector-690" startpinid="Resistor-102-rPin" endpinid="Led-209-lPin" pointList="-152,184,-140,184" />
-
-<item itemtype="Connector" uid="Connector-703" startpinid="Node-214-1" endpinid="Led-213-rPin" pointList="-284,260,-284,292,-208,292,-208,232,-136,232" />
-
-<item itemtype="Connector" uid="Connector-704" startpinid="Node-169-1" endpinid="Node-214-0" pointList="-284,224,-284,260" />
-
-<item itemtype="Connector" uid="Connector-705" startpinid="Node-214-2" endpinid="Push-68-pinP0" pointList="-284,260,-276,260" />
 
 <item itemtype="Connector" uid="Connector-710" startpinid="Resistor-96-rPin" endpinid="Led-216-lPin" pointList="76,-8,88,-8" />
 
@@ -294,8 +280,6 @@
 
 <item itemtype="Connector" uid="Connector-863" startpinid="Led-211-rPin" endpinid="Node-252-1" pointList="-108,208,-16,208,-16,24" />
 
-<item itemtype="Connector" uid="Connector-865" startpinid="Node-252-2" endpinid="Node-217-0" pointList="-16,24,12,24" />
-
 <item itemtype="Connector" uid="Connector-864" startpinid="Node-210-2" endpinid="Node-252-0" pointList="-24,24,-16,24" />
 
 <item itemtype="Connector" uid="Connector-862" startpinid="Uno-45-13" endpinid="Resistor-113-lPin" pointList="-180,72,-208,72,-208,208,-184,208" />
@@ -330,12 +314,6 @@
 
 <item itemtype="Connector" uid="Connector-543" startpinid="Resistor-102-lPin" endpinid="Uno-45-12" pointList="-184,184,-204,184,-204,64,-180,64" />
 
-<item itemtype="Connector" uid="Connector-520" startpinid="Node-166-1" endpinid="Node-167-0" pointList="-284,112,-284,148" />
-
-<item itemtype="Connector" uid="Connector-518" startpinid="Node-166-2" endpinid="Push-27-pinP0" pointList="-284,112,-276,112" />
-
-<item itemtype="Connector" uid="Connector-517" startpinid="Uno-45-GND2" endpinid="Node-166-0" pointList="-180,80,-284,80,-284,112" />
-
 <item itemtype="Connector" uid="Connector-501" startpinid="Uno-45-A2" endpinid="Resistor-160-lPin" pointList="-36,-16,260,-16,260,-92" />
 
 <item itemtype="Connector" uid="Connector-498" startpinid="Uno-45-A3" endpinid="Resistor-159-lPin" pointList="-36,-24,164,-24,164,-92,176,-92" />
@@ -351,5 +329,31 @@
 <item itemtype="Connector" uid="Connector-866" startpinid="Led-213-lPin" endpinid="Resistor-253-lPin" pointList="-104,232,-92,232" />
 
 <item itemtype="Connector" uid="Connector-867" startpinid="Uno-45-A0" endpinid="Resistor-253-rPin" pointList="-36,0,-8,0,-8,232,-60,232" />
+
+<item itemtype="Connector" uid="Connector-879" startpinid="Node-255-2" endpinid="Node-217-0" pointList="0,24,12,24" />
+
+<item itemtype="Connector" uid="Connector-882" startpinid="Node-256-2" endpinid="Push-68-pinP0" pointList="-276,260,-276,260" />
+
+<item itemtype="Connector" uid="Connector-884" startpinid="Node-256-1" endpinid="Node-257-0" pointList="-276,260,-276,224" />
+
+<item itemtype="Connector" uid="Connector-885" startpinid="Node-257-2" endpinid="Push-67-pinP0" pointList="-276,224,-276,224" />
+
+<item itemtype="Connector" uid="Connector-887" startpinid="Node-257-1" endpinid="Node-258-0" pointList="-276,224,-276,188" />
+
+<item itemtype="Connector" uid="Connector-888" startpinid="Node-258-2" endpinid="Push-66-pinP0" pointList="-276,188,-276,188" />
+
+<item itemtype="Connector" uid="Connector-889" startpinid="Node-259-1" endpinid="Push-27-pinP0" pointList="-276,152,-276,112" />
+
+<item itemtype="Connector" uid="Connector-890" startpinid="Node-258-1" endpinid="Node-259-0" pointList="-276,188,-276,152" />
+
+<item itemtype="Connector" uid="Connector-891" startpinid="Node-259-2" endpinid="Push-64-pinP0" pointList="-276,152,-276,148" />
+
+<item itemtype="Connector" uid="Connector-878" startpinid="Node-252-2" endpinid="Node-255-0" pointList="-16,24,0,24" />
+
+<item itemtype="Connector" uid="Connector-901" startpinid="Node-262-1" endpinid="Led-213-rPin" pointList="-200,320,-200,232,-136,232" />
+
+<item itemtype="Connector" uid="Connector-902" startpinid="Node-255-1" endpinid="Node-262-0" pointList="0,24,0,320,-200,320" />
+
+<item itemtype="Connector" uid="Connector-903" startpinid="Node-262-2" endpinid="Node-256-0" pointList="-200,320,-276,320,-276,260" />
 
 </circuit>
