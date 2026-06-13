@@ -1,11 +1,17 @@
-# Trabalho-Final-PSB---Roleta-Americana
+# Trabalho Final PSB : Roleta-Americana
+
+# 1. Código do Projeto
+- [código do trabalho](./src)
+
+# 2. Diagrama do circuito no simulIDE
+- [diagrama do circuito](./circuit)
 
 # 3. Documentação do Projeto
-- [3.1. Relação dos materiais utilizados](materiais.md)
-- [3.2. Prints do diagrama no SimulIDE](printsDiagrama.md)
-- [3.3. Fotos do circuito físico](fotosCircuitoFisico.md)
-- [3.4. Explicação do funcionamento](explicacaoDoFuncionamento.md)
-- [3.5. Guia de utilização](guiaDeUtilizacao.md)
+- [3.1. Relação dos materiais utilizados](./docs/materiais.md)
+- [3.2. Prints do diagrama no SimulIDE](./docs/printsDiagrama.md)
+- [3.3. Fotos do circuito físico](./docs/fotosCircuitoFisico.md)
+- [3.4. Explicação do funcionamento](./docs/explicacaoDoFuncionamento.md)
+- [3.5. Guia de utilização](./docs/guiaDeUtilizacao.md)
 
 
 ## Nomes dos integrantes da equipe
