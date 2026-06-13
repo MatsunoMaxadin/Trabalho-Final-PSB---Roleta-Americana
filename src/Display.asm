@@ -135,7 +135,7 @@ RJMP caso_0 ; RJMP para o caso 0, pois a rotina se encontra distante demais para
 decod_A:
 
 SBI PORTC, flagA ; Habilita display A
-CBI PORTC, flagB
+CBI PORTC, flagB ; Desabilita os displays restantes
 CBI PORTC, flagC
 CBI PORTC, flagD
 
@@ -148,7 +148,7 @@ RET
 decod_B:
 
 SBI PORTC, flagB ; Habilita display B
-CBI PORTC, flagA
+CBI PORTC, flagA ; Desabilita os displays restantes
 CBI PORTC, flagC
 CBI PORTC, flagD
 
@@ -161,7 +161,7 @@ RET
 decod_C:
 
 SBI PORTC, flagC ; Habilita display C
-CBI PORTC, flagA
+CBI PORTC, flagA ; Desabilita os displays restantes
 CBI PORTC, flagB
 CBI PORTC, flagD
 
@@ -174,7 +174,7 @@ RET
 decod_D:
 
 SBI PORTC, flagD ; Habilita display D
-CBI PORTC, flagA
+CBI PORTC, flagA ; Desabilita os displays restantes
 CBI PORTC, flagB
 CBI PORTC, flagC
 
