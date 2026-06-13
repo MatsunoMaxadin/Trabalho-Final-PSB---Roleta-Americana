@@ -123,6 +123,14 @@ AguardaSoltarModo:
     LDI flagModo, 0x00              ; após modo 5, volta ao modo 0
 
 AtualizaLEDsModo:
+    ; ------------------------------------------------------
+    ; AtualizaLEDsModo
+    ;
+    ; Limpa os LEDs de indicação de modo e acende apenas o
+    ; LED correspondente ao modo de aposta atual.
+    ; Modo 0 = PLAY, 1 = PAR, 2 = ÍMPAR, 3 = VERMELHO,
+    ; 4 = PRETO, 5 = NÚMERO ESPECÍFICO.
+    ; ------------------------------------------------------
     ; Apaga todos os LEDs antes de acender o do modo atual
     LDI AUX, 0b00001111
     OUT PORTB, AUX                  ; desliga LEDPRET (PB5) e mantém pull-ups

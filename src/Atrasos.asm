@@ -65,6 +65,16 @@ BRNE loop_maior ; Se R7 não for zero, reinicia todo o processo
 RET ; Retorna para a rotina chamadora
 
 
+; ----------------------------------------------------------
+; Rotina de Debounce
+;
+; Após apertar um botão, os contatos podem se fechar e abrir
+; rapidamente por um curto instante. Isso causa pulsos elétricos
+; indesejados que podem ser lidos como vários cliques.
+;
+; Esta rotina espera um pequeno tempo antes de aceitar o
+; comando, garantindo que o botão esteja realmente pressionado.
+; ----------------------------------------------------------
 Atraso_Debounce:		; atraso para o debounce dos botões
     LDI R29, 150            
 

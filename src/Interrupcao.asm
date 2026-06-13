@@ -1,3 +1,11 @@
+; ----------------------------------------------------------
+; Rotina de Interrupção INT0
+;
+; Esta rotina é chamada quando o botão de parada é pressionado.
+; Se a roleta estiver ativa (flagLoop = 1), ela para a roleta
+; e solicita a exibição do resultado final.
+; Caso contrário, ignora a interrupção para evitar bounce.
+; ----------------------------------------------------------
 Interrup:
     CPI flagLoop, 0x01
     BREQ PararLoop          ; se loop girando: seta flagSorteio = 2 (parar)

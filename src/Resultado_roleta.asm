@@ -1,32 +1,38 @@
+; +--------------------------------------------------------+
+; |                   Avaliar_resultado                    |
+; |                                                        |
+; | LÃª a cor do nÃºmero sorteado, verifica o modo atual e    |
+; | determina se o jogador venceu ou perdeu.                |
+; +--------------------------------------------------------+
 Avaliar_resultado:
-	; Zera LEDS que serão utilizados
-	CBI PORTC, LEDVITORIA ; Apaga LED de Vitória
+	; Zera LEDS que serï¿½o utilizados
+	CBI PORTC, LEDVITORIA ; Apaga LED de Vitï¿½ria
 	CBI PORTC, LEDVERM ; Apaga LED Vermelho
 	CBI PORTB, LEDPRET ; Apaga LED Preto
 	CBI PORTB, LEDVERDE ; Apaga LED Verde
 
-	; Usa ponteiro Z para ler a tabela de cores da memória Flash
-	LDI ZH, HIGH(Tabela_cores << 1) ; Carrega parte alta do endereço da tabeça
-	LDI ZL, LOW(Tabela_cores << 1) ; Carrega parte baixa do endereço da tabela
-	ADD ZL, resultado ; Soma número sorteado na roleta (0 a 37) ao ponteiro Z
-	BRCC sem_carry_cor ; Se a soma não estourar o Carry, não incrementa ZH
+	; Usa ponteiro Z para ler a tabela de cores da memï¿½ria Flash
+	LDI ZH, HIGH(Tabela_cores << 1) ; Carrega parte alta do endereï¿½o da tabeï¿½a
+	LDI ZL, LOW(Tabela_cores << 1) ; Carrega parte baixa do endereï¿½o da tabela
+	ADD ZL, resultado ; Soma nï¿½mero sorteado na roleta (0 a 37) ao ponteiro Z
+	BRCC sem_carry_cor ; Se a soma nï¿½o estourar o Carry, nï¿½o incrementa ZH
 	INC ZH ; Se a soma estourou, acrescenta o vai um para ZH (parte alta)
 
 sem_carry_cor:
 	LPM R16, Z ; coloca cor da tabela em R16 usando o ponteiro Z (0 = Verde, 1 = Vermelho, 2 = Preto)
 
-	CPI R16, 0 ; Verifica se é verde
-	BRNE checa_vermelho ; Se não é verde, checa vermelho
+	CPI R16, 0 ; Verifica se ï¿½ verde
+	BRNE checa_vermelho ; Se nï¿½o ï¿½ verde, checa vermelho
 	SBI PORTB, LEDVERDE ; Se for Verde, acende LED VERDE
 
-	; Abaixo segue o tratamento para 0 e 00. Representa derrota imediata em todos os modos, exceto o Modo 5 (Número específico)
+	; Abaixo segue o tratamento para 0 e 00. Representa derrota imediata em todos os modos, exceto o Modo 5 (Nï¿½mero especï¿½fico)
 	CPI flagModo, 0x05 ; Verifica se jogador escolheu Modo 5
-	BREQ checa_especifico ; Se sim, vai para rotina de verificar número específico
-	RJMP define_derrota ; Se não, perde automaticamente e vai para rotina de derrota
+	BREQ checa_especifico ; Se sim, vai para rotina de verificar nï¿½mero especï¿½fico
+	RJMP define_derrota ; Se nï¿½o, perde automaticamente e vai para rotina de derrota
 
 checa_vermelho:
-	CPI R16, 1 ; Verifica se cor é Vermelha
-	BRNE checa_preto ; Se não for, checa se é Preta
+	CPI R16, 1 ; Verifica se cor ï¿½ Vermelha
+	BRNE checa_preto ; Se nï¿½o for, checa se ï¿½ Preta
 	SBI PORTC, LEDVERM ; Acende LED Vermelho
 	RJMP avalia_modo ; Verifica modo de aposta
 
@@ -36,58 +42,58 @@ checa_preto:
 avalia_modo:
 	CPI flagModo, 0x01 ; Modo 1 = Par
 	BREQ checa_par
-	CPI flagModo, 0x02 ; Modo 2 = Ímpar
+	CPI flagModo, 0x02 ; Modo 2 = ï¿½mpar
 	BREQ checa_impar
 	CPI flagModo, 0x03 ; Modo 3 = Vermelho
 	BREQ checa_modo_verm 
 	CPI flagModo, 0x04 ; Modo 4 = Preto
 	BREQ checa_modo_preto
-	CPI flagModo, 0x05 ; Modo 5 = Número específico
+	CPI flagModo, 0x05 ; Modo 5 = Nï¿½mero especï¿½fico
 	BREQ checa_especifico
-	RJMP define_derrota ; Trava. Se não for nenhum modo, é derrota imediata
+	RJMP define_derrota ; Trava. Se nï¿½o for nenhum modo, ï¿½ derrota imediata
 
 checa_par:
-	SBRC resultado, 0 ; Verifica Bit 0. Se for 0 (par) pula a próxima linha
-	RJMP define_derrota ; Se o Bit 0 for 1, é ímpar, vai para Derrota
-	RJMP define_vitoria ; Se pulou linha, é par, vai para Vitoria
+	SBRC resultado, 0 ; Verifica Bit 0. Se for 0 (par) pula a prï¿½xima linha
+	RJMP define_derrota ; Se o Bit 0 for 1, ï¿½ ï¿½mpar, vai para Derrota
+	RJMP define_vitoria ; Se pulou linha, ï¿½ par, vai para Vitoria
 
 checa_impar:
-	SBRS resultado, 0 ;Verifica Bit 0. Se for 1 (ímpar) pula a próxima linha
-	RJMP define_derrota ; Se o Bit 0 for 0, é par, vai para Derrota
-	RJMP define_vitoria ; Se pulou linha, é par, vai para Vitoria
+	SBRS resultado, 0 ;Verifica Bit 0. Se for 1 (ï¿½mpar) pula a prï¿½xima linha
+	RJMP define_derrota ; Se o Bit 0 for 0, ï¿½ par, vai para Derrota
+	RJMP define_vitoria ; Se pulou linha, ï¿½ par, vai para Vitoria
 
 checa_modo_verm:
 	CPI R16, 1 ; Compara cor sorteada com vermelho
-	BREQ define_vitoria ; Se igual, Vitória
+	BREQ define_vitoria ; Se igual, Vitï¿½ria
 	RJMP define_derrota ; Se diferente, Derrota
 
 checa_modo_preto:
 	CPI R16, 2 ; Compara cor sorteada com preto
-	BREQ define_vitoria ; Se igual, Vitória
+	BREQ define_vitoria ; Se igual, Vitï¿½ria
 	RJMP define_derrota ; Se diferente, Derrota
 
 checa_especifico:
-	CP resultado, numEscolhido ; Compara Número sorteado com Número selecionado
-	BREQ define_vitoria ; Se igual, Vitória
+	CP resultado, numEscolhido ; Compara Nï¿½mero sorteado com Nï¿½mero selecionado
+	BREQ define_vitoria ; Se igual, Vitï¿½ria
 	RJMP define_derrota ; Se diferente, Derrota
 
 define_vitoria:
-	LDI R26, 1 ; R26 será usado como "flag" para indicar vitoria
+	LDI R26, 1 ; R26 serï¿½ usado como "flag" para indicar vitoria
 	RJMP loop_fim_jogo
 
 define_derrota:
-	LDI R26, 0 ; R26 será usado como "flag" para indicar derrota
+	LDI R26, 0 ; R26 serï¿½ usado como "flag" para indicar derrota
 	RJMP loop_fim_jogo
 
 loop_fim_jogo:
 	RCALL Mostrar_Display 
 
-	CPI R26, 1 ; Verifica Vitória através do "flag"
-	BRNE check_botao_sair ; Se R26 = 0, LEDS não piscam
+	CPI R26, 1 ; Verifica Vitï¿½ria atravï¿½s do "flag"
+	BRNE check_botao_sair ; Se R26 = 0, LEDS nï¿½o piscam
 
-	; Rotina de pequeno atraso para ser possível ver LEDs apagando e acendendo
+	; Rotina de pequeno atraso para ser possï¿½vel ver LEDs apagando e acendendo
 	INC R27
-	CPI R27,250 ; Pequeno atraso da inversão de LEDs
+	CPI R27,250 ; Pequeno atraso da inversï¿½o de LEDs
 	BRLO check_botao_sair ; Se for menor que 200, pula
 	LDI R27, 0 ; Zera contador R27
 
@@ -97,26 +103,26 @@ loop_fim_jogo:
 	LDI R28, 0
 
 
-	SBIC PORTC, LEDVITORIA ; Verifica se LEDVITORIA está ligado
-	RJMP apaga_vitoria ; Se está ligado, pula para rotina de apagar
-	SBI PORTC, LEDVITORIA ; Se está apagado, liga LEDVITORIA
+	SBIC PORTC, LEDVITORIA ; Verifica se LEDVITORIA estï¿½ ligado
+	RJMP apaga_vitoria ; Se estï¿½ ligado, pula para rotina de apagar
+	SBI PORTC, LEDVITORIA ; Se estï¿½ apagado, liga LEDVITORIA
 	RJMP check_botao_sair
 
 apaga_vitoria:
 	CBI PORTC, LEDVITORIA ; Desliga o LED
 
 check_botao_sair:
-	SBIC PINB, BOTAOMODO ; Verifica se Botão Modo foi pressionado
-	RJMP loop_fim_jogo ; Enquanto não pressionar, continua exibindo resultado/piscando LEDS
+	SBIC PINB, BOTAOMODO ; Verifica se Botï¿½o Modo foi pressionado
+	RJMP loop_fim_jogo ; Enquanto nï¿½o pressionar, continua exibindo resultado/piscando LEDS
 	RCALL Atraso_Debounce                     ; debounce ao pressionar
 
 espera_soltar_sair:
 	RCALL Mostrar_Display 
 	SBIS PINB, BOTAOMODO
-	RJMP espera_soltar_sair ; Loop até soltar botão
+	RJMP espera_soltar_sair ; Loop atï¿½ soltar botï¿½o
 	RCALL Atraso_Debounce                     ; debounce ao soltar
 
-	CBI PORTC, LEDVITORIA ; Apaga LED de Vitória
+	CBI PORTC, LEDVITORIA ; Apaga LED de Vitï¿½ria
 	CBI PORTC, LEDVERM ; Apaga LED Vermelho
 	CBI PORTB, LEDPRET ; Apaga LED Preto
 	CBI PORTB, LEDVERDE ; Apaga LED Verde
@@ -127,7 +133,10 @@ espera_soltar_sair:
 	RET
 
 Tabela_Cores:
-	.db 0, 1, 2, 1, 2, 1, 2, 1, 2, 1  ; Números 0 a 9
-	.db 2, 2, 1, 2, 1, 2, 1, 2, 1, 1  ; Números 10 a 19
-	.db 2, 1, 2, 1, 2, 1, 2, 1, 2, 2  ; Números 20 a 29
-	.db 1, 2, 1, 2, 1, 2, 1, 0        ; Números 30 a 36 e o 37 (representa o 00)
+	; Mapa de cores da roleta:
+	; 0 = Verde, 1 = Vermelho, 2 = Preto
+	; O Ã­ndice Ã© o nÃºmero sorteado de 0 a 37, com 37 representando 00.
+	.db 0, 1, 2, 1, 2, 1, 2, 1, 2, 1  ; Nï¿½meros 0 a 9
+	.db 2, 2, 1, 2, 1, 2, 1, 2, 1, 1  ; Nï¿½meros 10 a 19
+	.db 2, 1, 2, 1, 2, 1, 2, 1, 2, 2  ; Nï¿½meros 20 a 29
+	.db 1, 2, 1, 2, 1, 2, 1, 0        ; Nï¿½meros 30 a 36 e o 37 (representa o 00)

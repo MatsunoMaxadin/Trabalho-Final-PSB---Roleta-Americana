@@ -1,7 +1,10 @@
+; ----------------------------------------------------------
+; Rotina Escolher_numero
 ;
-; Função que verifica os botões de incremento e decremento, além de coletar o número em que o usuário deseja apostar.
-;
-
+; Permite ao jogador escolher um número para aposta usando
+; os botões INC e DEC. Mantém o display ativo enquanto espera
+; e sai quando o usuário pressiona MODO ou ROLETAR.
+; ----------------------------------------------------------
 
 Escolher_numero:
 
@@ -27,11 +30,12 @@ Verifica_botoes:
 	RJMP Verifica_botoes
 
 Incrementar:
+	; Debounce antes de aceitar a pressão do botão
 	RCALL Atraso_Debounce		; debounce precionar
 	espera_soltar_soma:
-	RCALL Mostrar_Display
+	RCALL Mostrar_Display      ; mantem o display ligado enquanto espera
 	SBIS PINB, BOTAOINC
-	RJMP espera_soltar_soma ; espera soltar o botão
+	RJMP espera_soltar_soma    ; espera soltar o botão
 	RCALL Atraso_Debounce		; debounce soltar
 
 	CPI numEscolhido, 37 ; compara com 37
@@ -48,11 +52,12 @@ Incrementar:
 	RET
 
 Decrementar:
-	RCALL Atraso_Debounce			; debounce pressionar
+	; Debounce antes de aceitar a pressão do botão
+	RCALL Atraso_Debounce		; debounce pressionar
 	espera_soltar_sub:
-	RCALL Mostrar_Display
+	RCALL Mostrar_Display      ; mantem o display ligado enquanto espera
 	SBIS PINB, BOTAODEC
-	RJMP espera_soltar_sub  ; espera soltar o botão
+	RJMP espera_soltar_sub     ; espera soltar o botão
 	RCALL Atraso_Debounce			; debounce soltar
 
 	CPI numEscolhido, 0 ; compara com 0
