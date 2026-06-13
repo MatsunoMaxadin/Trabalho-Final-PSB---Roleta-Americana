@@ -62,6 +62,10 @@
 
 ![Led vitória ligado](../assets/led_vitória_ligado.png)
 
+## 3.2.4. Print dos botões:
+
+![Botoes do circuito](../assets/botoes_circuito)
+
 ## 3.2.4. Print do Arduíno Uno
 
 ![Arduíno Uno](../assets/Arduíno_UNO.png)
