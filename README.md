@@ -15,8 +15,8 @@
 
 
 ## Nomes dos integrantes da equipe
-- Caio Vitor Santos Loureiro
-- João Rafael Barreto Mendonça
-- Guilherme Santos Meira
-- Pedro Henrique da Paz Rocha Santana
-- Pedro Henrique das Virgens Borges Santos
+- Caio Vitor Santos Loureiro - Análise dos materiais utilizados, módulo de Interrupção, montagem do circuito físico, markdown dos materiais utilizados e README
+- João Rafael Barreto Mendonça - Módulo Roleta (o principal módulo do projeto), slide da apresentação, auxílio na montagem do circuito físico. 
+- Guilherme Santos Meira - Módulo de escolher número, auxílio na montagem do circuito físico, markdown do guia de utilização e fotos do circuito físico. 
+- Pedro Henrique da Paz Rocha Santana - Módulo Display, Roletar e inicializaçõoes, auxílio na montagem do circuito físico, montagem do circuito no simulador, markdown das fotos do diagrama no simulIDE e README, organização do repositório.
+- Pedro Henrique das Virgens Borges Santos - Modulo resultado roleta, auxílio na montagem do circuito físico, markdown da explicação do funcionamento do circuito. 
