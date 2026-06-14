@@ -96,7 +96,7 @@ VerificaModo:
     ; 
 
 	SEI					; ativa o serviço de interrupção      
-    RCALL Roleta           
+    RCALL Roleta        ; chama em Roletar.asm   
     RCALL Avaliar_resultado
     RJMP inicializacoes ; volta ao inicio após o sorteio
 
